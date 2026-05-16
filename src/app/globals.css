@@ -72,6 +72,7 @@ body {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   color: var(--ink);
   background: var(--gray-50);
+  overflow-x: hidden; /* 가로 스크롤 방지 */
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
 }
@@ -257,7 +258,7 @@ button {
 
 .hero-home {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 24px;
   align-items: start;
 }
@@ -649,7 +650,7 @@ button {
 ──────────────────────────────────────────────── */
 .event-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 14px;
 }
 
@@ -1137,7 +1138,7 @@ button {
 .detail-hero {
   display: grid;
   gap: 20px;
-  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.85fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.85fr);
 }
 
 .timeline,
@@ -1419,6 +1420,31 @@ a.verify-badge-link:active {
 
   .event-card.is-top1 {
     grid-column: auto;
+  }
+
+  /* 히어로 2단 → 1단 */
+  .hero-home,
+  .detail-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* featured 이미지 숨기기 (텍스트만) */
+  .featured-event {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 필터 칩 줄바꿈 허용 */
+  .filter-chip-row {
+    flex-wrap: wrap;
+  }
+
+  /* 카드 내부 메타 정보 세로 정렬 */
+  .event-footer,
+  .event-meta,
+  .event-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 }
 

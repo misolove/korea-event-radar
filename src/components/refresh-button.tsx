@@ -33,19 +33,20 @@ export function RefreshButton({ lastIngestTime }: Props) {
         className="primary-button refresh-btn"
         onClick={handleRefresh}
         disabled={isPending}
+        title="DB에 저장된 정보를 화면에 다시 불러옵니다. 새 행사 수집은 매일 오전 9시에 자동으로 진행됩니다."
       >
         {isPending ? (
           <>
             <span className="refresh-spinner" aria-hidden="true" />
-            최신 무료 세미나 불러오는 중…
+            화면 새로고침 중…
           </>
         ) : (
-          <>⟳ 최신 무료 IT 세미나 새로고침</>
+          <>⟳ 화면 새로고침</>
         )}
       </button>
       {formattedIngest && (
         <span className="refresh-timestamp">
-          마지막 자동 수집: {formattedIngest}
+          마지막 자동 수집: {formattedIngest} · 매일 오전 9시 자동 업데이트
         </span>
       )}
     </div>

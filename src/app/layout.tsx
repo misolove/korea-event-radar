@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Seminar Scout AI — 무료 IT·AI 세미나 큐레이터",
   description: "AI가 선별한 무료 IT·AI 세미나 추천. 참석 가치, 광고 위험, 준비 팁까지 한 번에 확인하세요.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
