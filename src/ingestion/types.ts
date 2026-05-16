@@ -78,6 +78,7 @@ export type IngestionSummary = {
   totalExtracted: number;
   totalPersisted: number;
   totalFailed: number;
+  newEventIds: string[];   // 이번 수집에서 새로 삽입된 이벤트 ID 목록
   notes: string[];
   sourceStats: Array<{
     sourceName: string;

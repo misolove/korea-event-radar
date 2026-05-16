@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { runIngestion } from "@/ingestion/run";
 import { getEnv } from "@/lib/env";
 import { verifyEvent } from "@/lib/claude-verifier";
+import { generateCuration, fetchPageSnippet } from "@/lib/opus-curator";
 import { getDb } from "@/db/client";
 import { events } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import type { RegistrationStatus } from "@/lib/event-model";
 
 export const maxDuration = 300; // 5 min — Vercel Pro/Hobby max for cron
@@ -45,7 +46,66 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: false, step: "ingest", error: message }, { status: 500 });
   }
 
-  // ── Step 2: 모든 미래 이벤트 Claude 검증 (API 키 있을 때만) ──────
+  // ── Step 2: 신규 이벤트 Opus 큐레이션 (최초 1회) ──────────────
+  const curateResults: { slug: string; ok: boolean }[] = [];
+
+  if (apiKey && ingestSummary.newEventIds.length > 0) {
+    const db = getDb();
+    const newEvents = await db.select({
+      id: events.id,
+      slug: events.slug,
+      title: events.title,
+      organizer: events.organizer,
+      topicTags: events.topicTags,
+      eventKind: events.eventKind,
+      startsAt: events.startsAt,
+      venueName: events.venueName,
+      primarySourceUrl: events.primarySourceUrl,
+      registrationUrl: events.registrationUrl,
+      summary: events.summary,
+    }).from(events).where(inArray(events.id, ingestSummary.newEventIds));
+
+    for (const event of newEvents) {
+      // summary가 이미 있으면 스킵
+      if (event.summary) {
+        curateResults.push({ slug: event.slug, ok: false });
+        continue;
+      }
+      try {
+        const targetUrl = event.registrationUrl ?? event.primarySourceUrl;
+        const pageText = await fetchPageSnippet(targetUrl);
+
+        const curation = await generateCuration({
+          apiKey,
+          title: event.title,
+          organizer: event.organizer,
+          topicTags: event.topicTags ?? [],
+          eventKind: event.eventKind,
+          startsAt: event.startsAt?.toISOString() ?? null,
+          venueName: event.venueName,
+          primarySourceUrl: event.primarySourceUrl,
+          pageTextSnippet: pageText,
+        });
+
+        if (curation?.summary) {
+          await db.update(events)
+            .set({ summary: curation.summary, updatedAt: new Date() })
+            .where(eq(events.id, event.id));
+          curateResults.push({ slug: event.slug, ok: true });
+        } else {
+          curateResults.push({ slug: event.slug, ok: false });
+        }
+
+        // Opus API 과부하 방지 — 이벤트 간 800ms 대기
+        await new Promise((r) => setTimeout(r, 800));
+      } catch (err) {
+        curateResults.push({ slug: event.slug, ok: false });
+        console.error(`Curation failed for ${event.slug}:`, err);
+      }
+    }
+  }
+
+  // ── Step 3: 모든 미래 이벤트 Claude 검증 (API 키 있을 때만) ──────
   const verifyResults: { slug: string; status: string; reason: string }[] = [];
 
   if (apiKey) {
@@ -99,7 +159,7 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Step 3: 과거 행사 자동 삭제
+  // Step 4: 과거 행사 자동 삭제
   let cleanedCount = 0;
   try {
     const yesterday = new Date(Date.now() - 86400_000);
@@ -127,6 +187,11 @@ export async function GET(req: NextRequest) {
       extracted: ingestSummary.totalExtracted,
       candidates: ingestSummary.totalCandidates,
       failed: ingestSummary.totalFailed,
+      newEvents: ingestSummary.newEventIds.length,
+    },
+    curate: {
+      attempted: curateResults.length,
+      succeeded: curateResults.filter(r => r.ok).length,
     },
     verify: {
       checked: verifyResults.length,

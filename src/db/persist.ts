@@ -36,6 +36,7 @@ export async function finishIngestionRun(runId: string, summary: IngestionSummar
 export async function persistEventDrafts(drafts: ExtractedEventDraft[]) {
   const db = getDb();
   let totalPersisted = 0;
+  const newEventIds: string[] = [];
 
   for (const draft of drafts) {
     const existingId = await findExistingEventId(
@@ -74,11 +75,13 @@ export async function persistEventDrafts(drafts: ExtractedEventDraft[]) {
     } as const;
 
     let eventId = existingId;
+    let isNew = false;
     if (eventId) {
       await db.update(events).set(values).where(eq(events.id, eventId));
     } else {
       const [inserted] = await db.insert(events).values(values).returning();
       eventId = inserted.id;
+      isNew = true;
     }
 
     const storedEvent = await loadEventById(eventId);
@@ -86,6 +89,8 @@ export async function persistEventDrafts(drafts: ExtractedEventDraft[]) {
       continue;
     }
 
+    // 신규 삽입 기록
+    if (isNew) newEventIds.push(eventId);
     await db.insert(eventEvidence).values(
       draft.evidence.map((evidence) => ({
         eventId,
@@ -129,5 +134,5 @@ export async function persistEventDrafts(drafts: ExtractedEventDraft[]) {
     totalPersisted += 1;
   }
 
-  return totalPersisted;
+  return { totalPersisted, newEventIds };
 }

@@ -57,6 +57,7 @@ export async function runIngestion(selectedSeedIds?: string[]): Promise<Ingestio
     totalExtracted: 0,
     totalPersisted: 0,
     totalFailed: 0,
+    newEventIds: [],
     notes: [],
     sourceStats: [],
   };
@@ -110,7 +111,9 @@ export async function runIngestion(selectedSeedIds?: string[]): Promise<Ingestio
   summary.totalExtracted = deduped.length;
 
   if (hasDatabaseUrl()) {
-    summary.totalPersisted = await persistEventDrafts(deduped);
+    const result = await persistEventDrafts(deduped);
+    summary.totalPersisted = result.totalPersisted;
+    summary.newEventIds = result.newEventIds;
     const persistedBySource = new Map<string, number>();
     for (const draft of deduped) {
       persistedBySource.set(
