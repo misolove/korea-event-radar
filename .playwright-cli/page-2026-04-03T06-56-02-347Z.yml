@@ -1,0 +1,733 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - paragraph [ref=e6]: Korea IT/AI Event Radar MVP
+        - heading "무료와 등록 가능 여부를 먼저 보여주는 한국 IT·AI 행사 레이더" [level=1] [ref=e7]
+        - paragraph [ref=e8]: 검색과 핵심 필터를 먼저 놓고, 바로 신청할 만한 행사 한 건을 즉시 보여주도록 화면을 압축했습니다.
+        - generic "서비스 핵심 포인트" [ref=e9]:
+          - generic [ref=e10]: 무료 우선
+          - generic [ref=e11]: 등록 가능 우선
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e15]: 현재 결과
+          - strong [ref=e16]: "18"
+        - generic [ref=e17]:
+          - generic [ref=e18]: 등록 가능
+          - strong [ref=e19]: "0"
+        - generic [ref=e20]:
+          - generic [ref=e21]: 직접 확인
+          - strong [ref=e22]: "18"
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]: 검색
+          - searchbox "검색" [ref=e27]
+        - generic [ref=e28]:
+          - generic [ref=e29]: 상태
+          - combobox "상태" [ref=e30]:
+            - option "전체" [selected]
+            - option "등록 가능"
+            - option "대기 가능"
+            - option "마감"
+            - option "지난 행사"
+            - option "확인 필요"
+        - generic [ref=e31]:
+          - generic [ref=e32]: 가격
+          - combobox "가격" [ref=e33]:
+            - option "전체" [selected]
+            - option "무료"
+            - option "유료"
+            - option "무료/유료 혼합"
+            - option "가격 확인 필요"
+        - generic [ref=e34]:
+          - button "적용" [ref=e35]
+          - link "초기화" [ref=e36] [cursor=pointer]:
+            - /url: /
+      - group [ref=e37]:
+        - generic "추가 필터 +" [ref=e38] [cursor=pointer]
+        - option "전체" [selected]
+        - option "Meetup"
+        - option "AWS"
+        - option "EventUs"
+        - option "Ticketa"
+        - option "전체" [selected]
+        - option "오프라인"
+        - option "온라인"
+        - option "온·오프라인"
+        - option "형태 확인 필요"
+        - option "전체" [selected]
+        - option "컨퍼런스"
+        - option "세미나"
+        - option "밋업"
+        - option "웨비나"
+        - option "해커톤"
+        - option "부트캠프"
+        - option "전시"
+        - option "데모데이"
+        - option "네트워킹"
+        - option "교육과정"
+        - option "기타"
+        - option "전체" [selected]
+        - option "AI"
+        - option "개발자"
+        - option "데이터"
+        - option "디자인"
+        - option "스타트업"
+        - option "클라우드"
+    - generic [ref=e39]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: 지금 바로 볼 행사
+        - heading "SeoulShare Tech Talk - Impact of Social Media and AI" [level=2] [ref=e42]
+        - paragraph [ref=e43]: How is social media shaping the way we think—and what happens when AI starts shaping it too? Join us at **SeoulShare Tech Talk** for an engaging, beginner-friendly discussi
+        - generic [ref=e44]:
+          - generic [ref=e45]: 대기 가능
+          - generic [ref=e46]: 무료
+          - generic [ref=e47]: 직접 확인
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - term [ref=e50]: 일정
+          - definition [ref=e51]: 2026. 4. 4. 오후 12:50
+        - generic [ref=e52]:
+          - term [ref=e53]: 장소
+          - definition [ref=e54]: 서울 · KOTE Joseon Salon
+        - generic [ref=e55]:
+          - term [ref=e56]: 주최
+          - definition [ref=e57]: SeoulShare Community
+        - generic [ref=e58]:
+          - term [ref=e59]: 무료 행사
+          - definition [ref=e60]: 7건
+      - generic [ref=e61]:
+        - link "상세 보기" [ref=e62] [cursor=pointer]:
+          - /url: /events/seoulshare-tech-talk-impact-of-social-media-and-ai
+        - link "원문 보기" [ref=e63] [cursor=pointer]:
+          - /url: https://www.meetup.com/ko-KR/seoulshare/events/314053617/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - heading "추가 행사18건" [level=2] [ref=e66]:
+          - text: 추가 행사
+          - generic [ref=e67]: 18건
+        - paragraph [ref=e68]: 기본 정렬은 등록 상태, 무료 여부, 일정 임박 순입니다.
+      - generic [ref=e69]:
+        - generic "결과 요약" [ref=e70]:
+          - generic [ref=e71]: 등록 가능 0
+          - generic [ref=e72]: 무료 7
+        - link "운영 진단" [ref=e73] [cursor=pointer]:
+          - /url: /ops
+    - generic [ref=e74]:
+      - article [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]: Meetup
+          - generic [ref=e78]:
+            - generic [ref=e79]: 대기 가능
+            - generic [ref=e80]: 무료
+            - generic [ref=e81]: 직접 확인
+        - generic [ref=e82]:
+          - link "✨ AI Seoul - Online Learning and Talking 👥" [ref=e83] [cursor=pointer]:
+            - /url: /events/ai-seoul-online-learning-and-talking
+            - heading "✨ AI Seoul - Online Learning and Talking 👥" [level=3] [ref=e84]
+          - paragraph [ref=e85]: Welcome to *AI Seoul – Learning and Talking*! This online meetup is your chance to dive into the fascinating world of Artificial Intelligence in a friendly and supportive e
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - term [ref=e88]: 일정
+              - definition [ref=e89]: 2026. 4. 7. 오후 7:00
+            - generic [ref=e90]:
+              - term [ref=e91]: 장소
+              - definition [ref=e92]: 장소 확인 필요
+            - generic [ref=e93]:
+              - term [ref=e94]: 주최
+              - definition [ref=e95]: AI Seoul Public
+            - generic [ref=e96]:
+              - term [ref=e97]: 최근 확인
+              - definition [ref=e98]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - generic [ref=e101]: AI
+            - generic [ref=e102]: 데이터
+            - generic [ref=e103]: 스타트업
+            - generic [ref=e104]: 디자인
+          - generic [ref=e105]:
+            - link "상세 보기" [ref=e106] [cursor=pointer]:
+              - /url: /events/ai-seoul-online-learning-and-talking
+            - link "원문 보기" [ref=e107] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/ai-seoul-public/events/313831500/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e108]:
+        - generic [ref=e109]:
+          - generic [ref=e110]: Meetup
+          - generic [ref=e111]:
+            - generic [ref=e112]: 대기 가능
+            - generic [ref=e113]: 무료
+            - generic [ref=e114]: 직접 확인
+        - generic [ref=e115]:
+          - link "✨ AI Adoption Talk - Free Learning & Talking on AI (Gangnam Station) 👥" [ref=e116] [cursor=pointer]:
+            - /url: /events/ai-adoption-talk-free-learning-talking-on-ai-gangnam-station
+            - heading "✨ AI Adoption Talk - Free Learning & Talking on AI (Gangnam Station) 👥" [level=3] [ref=e117]
+          - paragraph [ref=e118]: "**The topic for this week's session is \"AI Agent: Part 2.\" It will be presented by Danil Ten who worked on AI agents for a while. We will cover what AI agents are popular t"
+          - generic [ref=e119]:
+            - generic [ref=e120]:
+              - term [ref=e121]: 일정
+              - definition [ref=e122]: 2026. 4. 11. 오전 10:30
+            - generic [ref=e123]:
+              - term [ref=e124]: 장소
+              - definition [ref=e125]: 서울 · Gangnam Station
+            - generic [ref=e126]:
+              - term [ref=e127]: 주최
+              - definition [ref=e128]: AI Seoul Public
+            - generic [ref=e129]:
+              - term [ref=e130]: 최근 확인
+              - definition [ref=e131]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e132]:
+          - generic [ref=e133]:
+            - generic [ref=e134]: AI
+            - generic [ref=e135]: 데이터
+            - generic [ref=e136]: 스타트업
+            - generic [ref=e137]: 개발자
+            - generic [ref=e138]: 디자인
+          - generic [ref=e139]:
+            - link "상세 보기" [ref=e140] [cursor=pointer]:
+              - /url: /events/ai-adoption-talk-free-learning-talking-on-ai-gangnam-station
+            - link "원문 보기" [ref=e141] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/ai-seoul-public/events/314013359/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e142]:
+        - generic [ref=e143]:
+          - generic [ref=e144]: Meetup
+          - generic [ref=e145]:
+            - generic [ref=e146]: 대기 가능
+            - generic [ref=e147]: 무료
+            - generic [ref=e148]: 직접 확인
+        - generic [ref=e149]:
+          - 'link "Coding with AI: The Shift - Part 1/3" [ref=e150] [cursor=pointer]':
+            - /url: /events/coding-with-ai-the-shift-part-1-3
+            - 'heading "Coding with AI: The Shift - Part 1/3" [level=3] [ref=e151]'
+          - paragraph [ref=e152]: "**NOTE THAT AN RSVP HERE DOES NOT GUARANTEE ADMISSION. Please fill out this form to attend**: [https://forms.gle/KtH8vmkMibAT7ix46](https://forms.gle/KtH8vmkMibAT7ix46) Sub"
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - term [ref=e155]: 일정
+              - definition [ref=e156]: 2026. 4. 11. 오후 6:00
+            - generic [ref=e157]:
+              - term [ref=e158]: 장소
+              - definition [ref=e159]: 서울 · Microsoft Korea Office
+            - generic [ref=e160]:
+              - term [ref=e161]: 주최
+              - definition [ref=e162]: Bryan Beege B. 및 Jaeyoon C.가 주최합니다
+            - generic [ref=e163]:
+              - term [ref=e164]: 최근 확인
+              - definition [ref=e165]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - generic [ref=e168]: AI
+            - generic [ref=e169]: 데이터
+            - generic [ref=e170]: 개발자
+            - generic [ref=e171]: 디자인
+          - generic [ref=e172]:
+            - link "상세 보기" [ref=e173] [cursor=pointer]:
+              - /url: /events/coding-with-ai-the-shift-part-1-3
+            - link "원문 보기" [ref=e174] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-kr/codeseoul/events/314084114/
+      - article [ref=e175]:
+        - generic [ref=e176]:
+          - generic [ref=e177]: Meetup
+          - generic [ref=e178]:
+            - generic [ref=e179]: 대기 가능
+            - generic [ref=e180]: 무료
+            - generic [ref=e181]: 직접 확인
+        - generic [ref=e182]:
+          - 'link "AWSKRUG #PlatformEngineering 플랫폼엔지니어링 모임 - 4월 15일(수)" [ref=e183] [cursor=pointer]':
+            - /url: /events/awskrug-platformengineering-플랫폼엔지니어링-모임-4월-15일-수
+            - 'heading "AWSKRUG #PlatformEngineering 플랫폼엔지니어링 모임 - 4월 15일(수)" [level=3] [ref=e184]'
+          - paragraph [ref=e185]: "안녕하세요 플랫폼엔지니어링 모임이 열립니다. ■ 일시 및 장소 2026년 4월 15일 수요일 19:00 \\~ 서울 강남구 테헤란로 231 센터필드 EAST 18층 18.300, 18.301, 18.400, 18.401 ■ 모임 내용 1. 세션: 에이전트 시대의 소프트웨어 개발 — 하네스 엔지니어링과"
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - term [ref=e188]: 일정
+              - definition [ref=e189]: 2026. 4. 15. 오후 7:00
+            - generic [ref=e190]:
+              - term [ref=e191]: 장소
+              - definition [ref=e192]: 서울 · Centerfield
+            - generic [ref=e193]:
+              - term [ref=e194]: 주최
+              - definition [ref=e195]: AWSKRUG - AWS한국사용자모임
+            - generic [ref=e196]:
+              - term [ref=e197]: 최근 확인
+              - definition [ref=e198]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e199]:
+          - generic [ref=e200]:
+            - generic [ref=e201]: AI
+            - generic [ref=e202]: 데이터
+            - generic [ref=e203]: 클라우드
+            - generic [ref=e204]: 개발자
+            - generic [ref=e205]: 디자인
+          - generic [ref=e206]:
+            - link "상세 보기" [ref=e207] [cursor=pointer]:
+              - /url: /events/awskrug-platformengineering-플랫폼엔지니어링-모임-4월-15일-수
+            - link "원문 보기" [ref=e208] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/awskrug/events/313678685/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e209]:
+        - generic [ref=e210]:
+          - generic [ref=e211]: Meetup
+          - generic [ref=e212]:
+            - generic [ref=e213]: 대기 가능
+            - generic [ref=e214]: 무료
+            - generic [ref=e215]: 직접 확인
+        - generic [ref=e216]:
+          - link "🤖 AI Seoul - Business Networking Lunch (Gangnam Station) 🍴" [ref=e217] [cursor=pointer]:
+            - /url: /events/ai-seoul-business-networking-lunch-gangnam-station
+            - heading "🤖 AI Seoul - Business Networking Lunch (Gangnam Station) 🍴" [level=3] [ref=e218]
+          - paragraph [ref=e219]: "**This is a continued session from 'AI Adoption Talk - Free Learning & Talking on AI' at 10:30 AM on the same day. (https://www.meetup.com/ai-seoul-public/events/wbxqwtyjcg"
+          - generic [ref=e220]:
+            - generic [ref=e221]:
+              - term [ref=e222]: 일정
+              - definition [ref=e223]: 2026. 4. 18. 오후 12:30
+            - generic [ref=e224]:
+              - term [ref=e225]: 장소
+              - definition [ref=e226]: 서울 · Gangnam Station
+            - generic [ref=e227]:
+              - term [ref=e228]: 주최
+              - definition [ref=e229]: AI Seoul Public
+            - generic [ref=e230]:
+              - term [ref=e231]: 최근 확인
+              - definition [ref=e232]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e233]:
+          - generic [ref=e234]:
+            - generic [ref=e235]: AI
+            - generic [ref=e236]: 데이터
+            - generic [ref=e237]: 스타트업
+            - generic [ref=e238]: 개발자
+            - generic [ref=e239]: 디자인
+          - generic [ref=e240]:
+            - link "상세 보기" [ref=e241] [cursor=pointer]:
+              - /url: /events/ai-seoul-business-networking-lunch-gangnam-station
+            - link "원문 보기" [ref=e242] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/ai-seoul-public/events/314012238/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e243]:
+        - generic [ref=e244]:
+          - generic [ref=e245]: AWS
+          - generic [ref=e246]:
+            - generic [ref=e247]: 대기 가능
+            - generic [ref=e248]: 무료
+            - generic [ref=e249]: 직접 확인
+        - generic [ref=e250]:
+          - link "AWS Summit Seoul" [ref=e251] [cursor=pointer]:
+            - /url: /events/aws-summit-seoul
+            - heading "AWS Summit Seoul" [level=3] [ref=e252]
+          - paragraph [ref=e253]: 5월 20-21일 코엑스에서 열리는 AWS Summit Seoul 2026에 참여하세요. AI 혁신, 산업 인사이트 및 클라우드 솔루션을 탐색하세요. AWS 전문가 및 업계 리더와 연결하세요. 지금 무료로 등록하세요!
+          - generic [ref=e254]:
+            - generic [ref=e255]:
+              - term [ref=e256]: 일정
+              - definition [ref=e257]: 일정 확인 필요
+            - generic [ref=e258]:
+              - term [ref=e259]: 장소
+              - definition [ref=e260]: 서울 · AWS Summit Seoul
+            - generic [ref=e261]:
+              - term [ref=e262]: 주최
+              - definition [ref=e263]: AWS
+            - generic [ref=e264]:
+              - term [ref=e265]: 최근 확인
+              - definition [ref=e266]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e267]:
+          - generic [ref=e268]:
+            - generic [ref=e269]: AI
+            - generic [ref=e270]: 데이터
+            - generic [ref=e271]: 클라우드
+            - generic [ref=e272]: 스타트업
+            - generic [ref=e273]: 개발자
+          - generic [ref=e274]:
+            - link "상세 보기" [ref=e275] [cursor=pointer]:
+              - /url: /events/aws-summit-seoul
+            - link "원문 보기" [ref=e276] [cursor=pointer]:
+              - /url: https://aws.amazon.com/ko/events/summits/korea/
+      - article [ref=e277]:
+        - generic [ref=e278]:
+          - generic [ref=e279]: EventUs
+          - generic [ref=e280]:
+            - generic [ref=e281]: 대기 가능
+            - generic [ref=e282]: 무료/유료 혼합
+            - generic [ref=e283]: 직접 확인
+        - generic [ref=e284]:
+          - link "[전액무료 국비교육] AI활용 디자인 크리에이터 양성 교육" [ref=e285] [cursor=pointer]:
+            - /url: /events/전액무료-국비교육-ai활용-디자인-크리에이터-양성-교육
+            - heading "[전액무료 국비교육] AI활용 디자인 크리에이터 양성 교육" [level=3] [ref=e286]
+          - paragraph [ref=e287]: 내가 원하는 행사를 개최하거나, 참여할 수 있는 플랫폼 - 이벤터스
+          - generic [ref=e288]:
+            - generic [ref=e289]:
+              - term [ref=e290]: 일정
+              - definition [ref=e291]: 2026. 4. 1. 오전 9:30
+            - generic [ref=e292]:
+              - term [ref=e293]: 장소
+              - definition [ref=e294]: 고양
+            - generic [ref=e295]:
+              - term [ref=e296]: 주최
+              - definition [ref=e297]: 호스트 홈
+            - generic [ref=e298]:
+              - term [ref=e299]: 최근 확인
+              - definition [ref=e300]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e301]:
+          - generic [ref=e302]:
+            - generic [ref=e303]: AI
+            - generic [ref=e304]: 데이터
+            - generic [ref=e305]: 디자인
+          - generic [ref=e306]:
+            - link "상세 보기" [ref=e307] [cursor=pointer]:
+              - /url: /events/전액무료-국비교육-ai활용-디자인-크리에이터-양성-교육
+            - link "원문 보기" [ref=e308] [cursor=pointer]:
+              - /url: https://event-us.kr/tjoeunis/event/112077
+      - article [ref=e309]:
+        - generic [ref=e310]:
+          - generic [ref=e311]: Meetup
+          - generic [ref=e312]:
+            - generic [ref=e313]: 대기 가능
+            - generic [ref=e314]: 무료/유료 혼합
+            - generic [ref=e315]: 직접 확인
+        - generic [ref=e316]:
+          - 'link "AWSKRUG #AIEngineering 소모임 - AWS 환경에서 비디오 인텔리전스 구현하기 (4월 9일)" [ref=e317] [cursor=pointer]':
+            - /url: /events/awskrug-aiengineering-소모임-aws-환경에서-비디오-인텔리전스-구현하기-4월-9일
+            - 'heading "AWSKRUG #AIEngineering 소모임 - AWS 환경에서 비디오 인텔리전스 구현하기 (4월 9일)" [level=3] [ref=e318]'
+          - paragraph [ref=e319]: "안녕하세요. 이번 AWSKRUG #AIEngineering 소모임에서는 **TwelveLabs의 멀티모달 비디오 임베딩 모델을 활용하여 AWS 환경에서 비디오 인텔리전스를 구현**하는 방법을 소개합니다. 이론 세션과 핸즈온 워크샵을 통해 비디오 분석 파이프라인 구축부터 에이전틱 비디오 엔진까지 직접 체험해"
+          - generic [ref=e320]:
+            - generic [ref=e321]:
+              - term [ref=e322]: 일정
+              - definition [ref=e323]: 2026. 4. 9. 오후 7:30
+            - generic [ref=e324]:
+              - term [ref=e325]: 장소
+              - definition [ref=e326]: 서울 · Centerfield
+            - generic [ref=e327]:
+              - term [ref=e328]: 주최
+              - definition [ref=e329]: AWSKRUG - AWS한국사용자모임
+            - generic [ref=e330]:
+              - term [ref=e331]: 최근 확인
+              - definition [ref=e332]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e333]:
+          - generic [ref=e334]:
+            - generic [ref=e335]: AI
+            - generic [ref=e336]: 데이터
+            - generic [ref=e337]: 클라우드
+            - generic [ref=e338]: 개발자
+            - generic [ref=e339]: 디자인
+          - generic [ref=e340]:
+            - link "상세 보기" [ref=e341] [cursor=pointer]:
+              - /url: /events/awskrug-aiengineering-소모임-aws-환경에서-비디오-인텔리전스-구현하기-4월-9일
+            - link "원문 보기" [ref=e342] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/awskrug/events/313831600/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e343]:
+        - generic [ref=e344]:
+          - generic [ref=e345]: Meetup
+          - generic [ref=e346]:
+            - generic [ref=e347]: 대기 가능
+            - generic [ref=e348]: 무료/유료 혼합
+            - generic [ref=e349]: 직접 확인
+        - generic [ref=e350]:
+          - 'link "AWSKRUG 서버리스 #Serverless 소모임 (4월 14일)" [ref=e351] [cursor=pointer]':
+            - /url: /events/awskrug-서버리스-serverless-소모임-4월-14일
+            - 'heading "AWSKRUG 서버리스 #Serverless 소모임 (4월 14일)" [level=3] [ref=e352]'
+          - paragraph [ref=e353]: "안녕하세요. AWSKRUG 서버리스 모임입니다. AWSKRUG 서버리스 소모임은 AWS와 클라우드 컴퓨팅에 관심 있는 분들중에서도, 특히 Lamda와 같은 서버리스 관련 서비스를 활용하는 방법에 대해서 지식과 정보를 교류합니다. * 서버리스 서비스 보기: [https://aws.amazon.com/ko/"
+          - generic [ref=e354]:
+            - generic [ref=e355]:
+              - term [ref=e356]: 일정
+              - definition [ref=e357]: 2026. 4. 14. 오후 7:00
+            - generic [ref=e358]:
+              - term [ref=e359]: 장소
+              - definition [ref=e360]: 서울 · Centerfield
+            - generic [ref=e361]:
+              - term [ref=e362]: 주최
+              - definition [ref=e363]: AWSKRUG - AWS한국사용자모임
+            - generic [ref=e364]:
+              - term [ref=e365]: 최근 확인
+              - definition [ref=e366]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e367]:
+          - generic [ref=e368]:
+            - generic [ref=e369]: AI
+            - generic [ref=e370]: 데이터
+            - generic [ref=e371]: 클라우드
+            - generic [ref=e372]: 개발자
+            - generic [ref=e373]: 디자인
+          - generic [ref=e374]:
+            - link "상세 보기" [ref=e375] [cursor=pointer]:
+              - /url: /events/awskrug-서버리스-serverless-소모임-4월-14일
+            - link "원문 보기" [ref=e376] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/awskrug/events/313809952/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e377]:
+        - generic [ref=e378]:
+          - generic [ref=e379]: Meetup
+          - generic [ref=e380]:
+            - generic [ref=e381]: 대기 가능
+            - generic [ref=e382]: 무료/유료 혼합
+            - generic [ref=e383]: 직접 확인
+        - generic [ref=e384]:
+          - 'link "AWSKRUG #container 🐳 소모임 - 4월 23일" [ref=e385] [cursor=pointer]':
+            - /url: /events/awskrug-container-소모임-4월-23일
+            - 'heading "AWSKRUG #container 🐳 소모임 - 4월 23일" [level=3] [ref=e386]'
+          - paragraph [ref=e387]: "컨테이너 기반 워크플로우를 실제 조직에 적용하며 겪은 경험을 공유하는 세션입니다. 단순 기능 소개를 넘어, 왜 내부 플랫폼으로 확장했는지와 운영하면서 마주한 현실적인 문제들까지 함께 짚어보고자 합니다. 관심 있으신 분들의 많은 참여를 기다립니다. 📘 발표 세션 안내 제목: **Argo Workflows를"
+          - generic [ref=e388]:
+            - generic [ref=e389]:
+              - term [ref=e390]: 일정
+              - definition [ref=e391]: 2026. 4. 23. 오후 7:00
+            - generic [ref=e392]:
+              - term [ref=e393]: 장소
+              - definition [ref=e394]: 서울 · Centerfield
+            - generic [ref=e395]:
+              - term [ref=e396]: 주최
+              - definition [ref=e397]: AWSKRUG - AWS한국사용자모임
+            - generic [ref=e398]:
+              - term [ref=e399]: 최근 확인
+              - definition [ref=e400]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e401]:
+          - generic [ref=e402]:
+            - generic [ref=e403]: AI
+            - generic [ref=e404]: 데이터
+            - generic [ref=e405]: 클라우드
+            - generic [ref=e406]: 개발자
+            - generic [ref=e407]: 디자인
+          - generic [ref=e408]:
+            - link "상세 보기" [ref=e409] [cursor=pointer]:
+              - /url: /events/awskrug-container-소모임-4월-23일
+            - link "원문 보기" [ref=e410] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/awskrug/events/313959510/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+      - article [ref=e411]:
+        - generic [ref=e412]:
+          - generic [ref=e413]: Ticketa
+          - generic [ref=e414]:
+            - generic [ref=e415]: 대기 가능
+            - generic [ref=e416]: 무료/유료 혼합
+            - generic [ref=e417]: 직접 확인
+        - generic [ref=e418]:
+          - link "GitHub Copilot Dev Days | Seoul | 티켓타코" [ref=e419] [cursor=pointer]:
+            - /url: /events/github-copilot-dev-days-seoul-티켓타코
+            - heading "GitHub Copilot Dev Days | Seoul | 티켓타코" [level=3] [ref=e420]
+          - paragraph [ref=e421]: 🌐 GitHub Copilot Dev Days Global Event GitHub Copilot Dev Days Seoul AI 코딩 어시스턴트와 함께하는 실전 개발 워크샵 📅 2026년 4월 25일 (토) 🕐 12:00 - 18:00 📍 한국 마이크로소프트...
+          - generic [ref=e422]:
+            - generic [ref=e423]:
+              - term [ref=e424]: 일정
+              - definition [ref=e425]: 2026. 4. 25. 오후 12:00
+            - generic [ref=e426]:
+              - term [ref=e427]: 장소
+              - definition [ref=e428]: 서울 · GitHub Copilot Dev Days | Seoul | 티켓타코
+            - generic [ref=e429]:
+              - term [ref=e430]: 주최
+              - definition [ref=e431]: Ticketa
+            - generic [ref=e432]:
+              - term [ref=e433]: 최근 확인
+              - definition [ref=e434]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e435]:
+          - generic [ref=e436]:
+            - generic [ref=e437]: AI
+            - generic [ref=e438]: 데이터
+            - generic [ref=e439]: 개발자
+          - generic [ref=e440]:
+            - link "상세 보기" [ref=e441] [cursor=pointer]:
+              - /url: /events/github-copilot-dev-days-seoul-티켓타코
+            - link "원문 보기" [ref=e442] [cursor=pointer]:
+              - /url: https://ticketa.co/event/dyaiayw5
+      - article [ref=e443]:
+        - generic [ref=e444]:
+          - generic [ref=e445]: EventUs
+          - generic [ref=e446]:
+            - generic [ref=e447]: 대기 가능
+            - generic [ref=e448]: 무료/유료 혼합
+            - generic [ref=e449]: 직접 확인
+        - generic [ref=e450]:
+          - link "Upstage AI Talk" [ref=e451] [cursor=pointer]:
+            - /url: /events/upstage-ai-talk
+            - heading "Upstage AI Talk" [level=3] [ref=e452]
+          - paragraph [ref=e453]: 인공지능 분야의 최신 동향을 파악하고, 세계적인 전문가들과 교류할 수 있는 이번 행사에 많은 관심 부탁드립니다.
+          - generic [ref=e454]:
+            - generic [ref=e455]:
+              - term [ref=e456]: 일정
+              - definition [ref=e457]: 2026. 9. 11. 오후 6:00
+            - generic [ref=e458]:
+              - term [ref=e459]: 장소
+              - definition [ref=e460]: 서울
+            - generic [ref=e461]:
+              - term [ref=e462]: 주최
+              - definition [ref=e463]: 호스트 홈
+            - generic [ref=e464]:
+              - term [ref=e465]: 최근 확인
+              - definition [ref=e466]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e467]:
+          - generic [ref=e468]:
+            - generic [ref=e469]: AI
+            - generic [ref=e470]: 데이터
+            - generic [ref=e471]: 스타트업
+            - generic [ref=e472]: 디자인
+          - generic [ref=e473]:
+            - link "상세 보기" [ref=e474] [cursor=pointer]:
+              - /url: /events/upstage-ai-talk
+            - link "원문 보기" [ref=e475] [cursor=pointer]:
+              - /url: https://event-us.kr/Upstage2020/event/90671
+      - article [ref=e476]:
+        - generic [ref=e477]:
+          - generic [ref=e478]: Ticketa
+          - generic [ref=e479]:
+            - generic [ref=e480]: 대기 가능
+            - generic [ref=e481]: 무료/유료 혼합
+            - generic [ref=e482]: 직접 확인
+        - generic [ref=e483]:
+          - 'link "Grafana & Friends Seoul #1: AI 시대의 SRE와 모니터링 | 티켓타코" [ref=e484] [cursor=pointer]':
+            - /url: /events/grafana-friends-seoul-1-ai-시대의-sre와-모니터링-티켓타코
+            - 'heading "Grafana & Friends Seoul #1: AI 시대의 SRE와 모니터링 | 티켓타코" [level=3] [ref=e485]'
+          - paragraph [ref=e486]: 소개 Grafana & Friends Seoul의 첫 번째 밋업에 여러분을 초대합니다! 이번 밋업의 주제는 AI 시대의 SRE와 모니터링 입니다. AI와 Observability의 결합, Grafana OSS 활용 사례, SRE/SLO 경험 등 모니터링과 관측에 관한...
+          - generic [ref=e487]:
+            - generic [ref=e488]:
+              - term [ref=e489]: 일정
+              - definition [ref=e490]: 일정 확인 필요
+            - generic [ref=e491]:
+              - term [ref=e492]: 장소
+              - definition [ref=e493]: "서울 · Grafana & Friends Seoul #1: AI 시대의 SRE와 모니터링 | 티켓타코"
+            - generic [ref=e494]:
+              - term [ref=e495]: 주최
+              - definition [ref=e496]: Ticketa
+            - generic [ref=e497]:
+              - term [ref=e498]: 최근 확인
+              - definition [ref=e499]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e500]:
+          - generic [ref=e501]:
+            - generic [ref=e502]: AI
+            - generic [ref=e503]: 데이터
+            - generic [ref=e504]: 개발자
+          - generic [ref=e505]:
+            - link "상세 보기" [ref=e506] [cursor=pointer]:
+              - /url: /events/grafana-friends-seoul-1-ai-시대의-sre와-모니터링-티켓타코
+            - link "원문 보기" [ref=e507] [cursor=pointer]:
+              - /url: https://ticketa.co/event/dtdi6msi
+      - article [ref=e508]:
+        - generic [ref=e509]:
+          - generic [ref=e510]: Ticketa
+          - generic [ref=e511]:
+            - generic [ref=e512]: 대기 가능
+            - generic [ref=e513]: 무료/유료 혼합
+            - generic [ref=e514]: 직접 확인
+        - generic [ref=e515]:
+          - link "Flutter Seoul Meetup 바이브코딩 해커톤 | 티켓타코" [ref=e516] [cursor=pointer]:
+            - /url: /events/flutter-seoul-meetup-바이브코딩-해커톤-티켓타코
+            - heading "Flutter Seoul Meetup 바이브코딩 해커톤 | 티켓타코" [level=3] [ref=e517]
+          - paragraph [ref=e518]: Flutter Seoul Meetup! With Vibe Coding Hackathon 안녕하세요! 머릿속 반짝이는 아이디어를 앱으로 만들어보고 싶었던 모든 분들을 환영합니다. 이번 서울 밋업은 개발자뿐만 아니라 기획자, 디자이너, 그리고 AI와 '바이브 코딩(Vibe...
+          - generic [ref=e519]:
+            - generic [ref=e520]:
+              - term [ref=e521]: 일정
+              - definition [ref=e522]: 일정 확인 필요
+            - generic [ref=e523]:
+              - term [ref=e524]: 장소
+              - definition [ref=e525]: 서울 · Flutter Seoul Meetup 바이브코딩 해커톤 | 티켓타코
+            - generic [ref=e526]:
+              - term [ref=e527]: 주최
+              - definition [ref=e528]: Ticketa
+            - generic [ref=e529]:
+              - term [ref=e530]: 최근 확인
+              - definition [ref=e531]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e532]:
+          - generic [ref=e533]:
+            - generic [ref=e534]: AI
+            - generic [ref=e535]: 데이터
+            - generic [ref=e536]: 개발자
+          - generic [ref=e537]:
+            - link "상세 보기" [ref=e538] [cursor=pointer]:
+              - /url: /events/flutter-seoul-meetup-바이브코딩-해커톤-티켓타코
+            - link "원문 보기" [ref=e539] [cursor=pointer]:
+              - /url: https://ticketa.co/event/ycbz77ae
+      - article [ref=e540]:
+        - generic [ref=e541]:
+          - generic [ref=e542]: Ticketa
+          - generic [ref=e543]:
+            - generic [ref=e544]: 대기 가능
+            - generic [ref=e545]: 무료/유료 혼합
+            - generic [ref=e546]: 직접 확인
+        - generic [ref=e547]:
+          - link "Build with AI x GDG Busan 2026 - AI Hackathon | 티켓타코" [ref=e548] [cursor=pointer]:
+            - /url: /events/build-with-ai-x-gdg-busan-2026-ai-hackathon-티켓타코
+            - heading "Build with AI x GDG Busan 2026 - AI Hackathon | 티켓타코" [level=3] [ref=e549]
+          - paragraph [ref=e550]: 🚀 행사 소개 Build with AI는 Google의 최신 AI 기술을 직접 다뤄보며 배울 수 있는 실습형 개발자 캠페인입니다. Gemini, Vertex AI, AI Studio, Antigravity를 비롯한 최신 Google AI 기술 및 모델을 사용하여...
+          - generic [ref=e551]:
+            - generic [ref=e552]:
+              - term [ref=e553]: 일정
+              - definition [ref=e554]: 일정 확인 필요
+            - generic [ref=e555]:
+              - term [ref=e556]: 장소
+              - definition [ref=e557]: 부산 · Build with AI x GDG Busan 2026 - AI Hackathon | 티켓타코
+            - generic [ref=e558]:
+              - term [ref=e559]: 주최
+              - definition [ref=e560]: Ticketa
+            - generic [ref=e561]:
+              - term [ref=e562]: 최근 확인
+              - definition [ref=e563]: 2026. 4. 3. 오후 3:25
+        - generic [ref=e564]:
+          - generic [ref=e565]:
+            - generic [ref=e566]: AI
+            - generic [ref=e567]: 데이터
+            - generic [ref=e568]: 클라우드
+            - generic [ref=e569]: 개발자
+          - generic [ref=e570]:
+            - link "상세 보기" [ref=e571] [cursor=pointer]:
+              - /url: /events/build-with-ai-x-gdg-busan-2026-ai-hackathon-티켓타코
+            - link "원문 보기" [ref=e572] [cursor=pointer]:
+              - /url: https://ticketa.co/event/6u6vfsn9
+      - article [ref=e573]:
+        - generic [ref=e574]:
+          - generic [ref=e575]: Meetup
+          - generic [ref=e576]:
+            - generic [ref=e577]: 대기 가능
+            - generic [ref=e578]: 가격 확인 필요
+            - generic [ref=e579]: 직접 확인
+        - generic [ref=e580]:
+          - link "📈 AI Seoul - Online Tech Stock Talk 💻" [ref=e581] [cursor=pointer]:
+            - /url: /events/ai-seoul-online-tech-stock-talk
+            - heading "📈 AI Seoul - Online Tech Stock Talk 💻" [level=3] [ref=e582]
+          - paragraph [ref=e583]: https://meet.google.com/cyq-nzoo-vqa PLEASE, SIGN UP BEFORE YOU LOG IN. YOU MAY GET EJECTED IF YOU DON'T. 😉 AI is transforming industries at lightning speed ⚡ — but it’s
+          - generic [ref=e584]:
+            - generic [ref=e585]:
+              - term [ref=e586]: 일정
+              - definition [ref=e587]: 2026. 4. 9. 오후 7:00
+            - generic [ref=e588]:
+              - term [ref=e589]: 장소
+              - definition [ref=e590]: 장소 확인 필요
+            - generic [ref=e591]:
+              - term [ref=e592]: 주최
+              - definition [ref=e593]: AI Seoul Public
+            - generic [ref=e594]:
+              - term [ref=e595]: 최근 확인
+              - definition [ref=e596]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e597]:
+          - generic [ref=e598]:
+            - generic [ref=e599]: AI
+            - generic [ref=e600]: 데이터
+            - generic [ref=e601]: 스타트업
+            - generic [ref=e602]: 디자인
+          - generic [ref=e603]:
+            - link "상세 보기" [ref=e604] [cursor=pointer]:
+              - /url: /events/ai-seoul-online-tech-stock-talk
+            - link "원문 보기" [ref=e605] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/ai-seoul-public/events/313865411/?recId=b904eee5-8dea-4d11-9f7c-5f22de98c7bb&recSource=event-search&searchId=93527bc7-d6bc-4f33-a71f-538674100be4&eventOrigin=find_page%24all
+      - article [ref=e606]:
+        - generic [ref=e607]:
+          - generic [ref=e608]: Meetup
+          - generic [ref=e609]:
+            - generic [ref=e610]: 대기 가능
+            - generic [ref=e611]: 가격 확인 필요
+            - generic [ref=e612]: 직접 확인
+        - generic [ref=e613]:
+          - 'link "Grafana & Friends Seoul #1: AI 시대의 SRE와 모니터링" [ref=e614] [cursor=pointer]':
+            - /url: /events/grafana-friends-seoul-1-ai-시대의-sre와-모니터링
+            - 'heading "Grafana & Friends Seoul #1: AI 시대의 SRE와 모니터링" [level=3] [ref=e615]'
+          - paragraph [ref=e616]: Grafana & Friends Seoul의 첫 번째 밋업에 여러분을 초대합니다! 이번 밋업의 주제는 ***AI 시대의 SRE와 모니터링*** 입니다. AI와 Observability의 결합, Grafana OSS 활용 사례, SRE/SLO 경험 등 모니터링과 관측에 관한 다양한 이야기를 나눠보려 합니다
+          - generic [ref=e617]:
+            - generic [ref=e618]:
+              - term [ref=e619]: 일정
+              - definition [ref=e620]: 2026. 4. 11. 오후 1:00
+            - generic [ref=e621]:
+              - term [ref=e622]: 장소
+              - definition [ref=e623]: 서울 · Sionic AI
+            - generic [ref=e624]:
+              - term [ref=e625]: 주최
+              - definition [ref=e626]: Grafana & Friends Seoul
+            - generic [ref=e627]:
+              - term [ref=e628]: 최근 확인
+              - definition [ref=e629]: 2026. 4. 3. 오후 3:30
+        - generic [ref=e630]:
+          - generic [ref=e631]:
+            - generic [ref=e632]: AI
+            - generic [ref=e633]: 데이터
+            - generic [ref=e634]: 디자인
+          - generic [ref=e635]:
+            - link "상세 보기" [ref=e636] [cursor=pointer]:
+              - /url: /events/grafana-friends-seoul-1-ai-시대의-sre와-모니터링
+            - link "원문 보기" [ref=e637] [cursor=pointer]:
+              - /url: https://www.meetup.com/ko-KR/grafana-friends-seoul/events/313664799/?recId=d6bec6aa-2cc5-46ef-a297-b8d8a5981834&recSource=event-search&searchId=bb9303ca-5042-4654-b487-50fbc0e6195f&eventOrigin=find_page%24all
+  - button "Open Next.js Dev Tools" [ref=e643] [cursor=pointer]:
+    - img [ref=e644]

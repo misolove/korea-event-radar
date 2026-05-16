@@ -1,0 +1,205 @@
+{
+  "inventoryVersion": 1,
+  "generatedAt": "2026-04-03",
+  "scope": {
+    "type": "session",
+    "cwd": "/Users/letitbe/letitbe/korea-event-radar",
+    "notes": [
+      "Inventory covers MCP servers enabled in the active Codex session.",
+      "Connector apps such as GitHub, Gmail, Google Drive, and Notion are not included because they are exposed through app tools rather than codex mcp list.",
+      "Shared MCP resources and resource templates were empty when this inventory was generated."
+    ]
+  },
+  "resources": [],
+  "resourceTemplates": [],
+  "servers": [
+    {
+      "name": "omx_code_intel",
+      "status": "enabled",
+      "auth": "unsupported",
+      "transport": {
+        "type": "stdio",
+        "command": "node",
+        "args": [
+          "/opt/homebrew/lib/node_modules/oh-my-codex/dist/mcp/code-intel-server.js"
+        ]
+      },
+      "tools": [
+        { "name": "ast_grep_replace", "description": "AST-based search and replace with dry-run preview by default." },
+        { "name": "ast_grep_search", "description": "AST-based code search using metavariables." },
+        { "name": "lsp_diagnostics", "description": "File-level diagnostics such as errors and warnings." },
+        { "name": "lsp_diagnostics_directory", "description": "Project-wide diagnostics for a directory." },
+        { "name": "lsp_document_symbols", "description": "Hierarchical symbol outline for a file." },
+        { "name": "lsp_find_references", "description": "Find references to a symbol across the workspace." },
+        { "name": "lsp_hover", "description": "Get approximate type information and documentation at a position." },
+        { "name": "lsp_servers", "description": "List available diagnostic backends and their status." },
+        { "name": "lsp_workspace_symbols", "description": "Search workspace symbols by name." }
+      ]
+    },
+    {
+      "name": "omx_memory",
+      "status": "enabled",
+      "auth": "unsupported",
+      "transport": {
+        "type": "stdio",
+        "command": "node",
+        "args": [
+          "/opt/homebrew/lib/node_modules/oh-my-codex/dist/mcp/memory-server.js"
+        ]
+      },
+      "tools": [
+        { "name": "notepad_prune", "description": "Prune old working-memory entries from the notepad." },
+        { "name": "notepad_read", "description": "Read the notepad or a specific section." },
+        { "name": "notepad_stats", "description": "Get size and age statistics for the notepad." },
+        { "name": "notepad_write_manual", "description": "Add a persistent manual note." },
+        { "name": "notepad_write_priority", "description": "Replace the priority-context section." },
+        { "name": "notepad_write_working", "description": "Append a timestamped working-memory note." },
+        { "name": "project_memory_add_directive", "description": "Add a persistent directive to project memory." },
+        { "name": "project_memory_add_note", "description": "Add a categorized note to project memory." },
+        { "name": "project_memory_read", "description": "Read project memory." },
+        { "name": "project_memory_write", "description": "Write or merge project memory JSON." }
+      ]
+    },
+    {
+      "name": "omx_state",
+      "status": "enabled",
+      "auth": "unsupported",
+      "transport": {
+        "type": "stdio",
+        "command": "node",
+        "args": [
+          "/opt/homebrew/lib/node_modules/oh-my-codex/dist/mcp/state-server.js"
+        ]
+      },
+      "tools": [
+        { "name": "state_clear", "description": "Clear stored state for a mode." },
+        { "name": "state_get_status", "description": "Get status for one mode or all modes." },
+        { "name": "state_list_active", "description": "List all active modes." },
+        { "name": "state_read", "description": "Read state JSON for a specific mode." },
+        { "name": "state_write", "description": "Write or update state for a specific mode." }
+      ]
+    },
+    {
+      "name": "omx_team_run",
+      "status": "enabled",
+      "auth": "unsupported",
+      "transport": {
+        "type": "stdio",
+        "command": "node",
+        "args": [
+          "/opt/homebrew/lib/node_modules/oh-my-codex/dist/mcp/team-server.js"
+        ]
+      },
+      "tools": [
+        { "name": "omx_run_team_cleanup", "description": "Stop worker panes for a background team job." },
+        { "name": "omx_run_team_start", "description": "Start tmux-backed parallel workers." },
+        { "name": "omx_run_team_status", "description": "Poll non-blocking status for a team job." },
+        { "name": "omx_run_team_wait", "description": "Wait for team completion or the next team event." }
+      ]
+    },
+    {
+      "name": "omx_trace",
+      "status": "enabled",
+      "auth": "unsupported",
+      "transport": {
+        "type": "stdio",
+        "command": "node",
+        "args": [
+          "/opt/homebrew/lib/node_modules/oh-my-codex/dist/mcp/trace-server.js"
+        ]
+      },
+      "tools": [
+        { "name": "trace_summary", "description": "Show aggregate trace statistics." },
+        { "name": "trace_timeline", "description": "Show the chronological agent trace timeline." }
+      ]
+    },
+    {
+      "name": "pencil",
+      "status": "enabled",
+      "auth": "unsupported",
+      "transport": {
+        "type": "stdio",
+        "command": "/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+        "args": ["--app", "desktop"]
+      },
+      "tools": [
+        { "name": "batch_design", "description": "Apply multi-operation edits to .pen design files." },
+        { "name": "batch_get", "description": "Read or search nodes in a .pen file." },
+        { "name": "export_nodes", "description": "Export nodes to PNG, JPEG, WEBP, or PDF." },
+        { "name": "find_empty_space_on_canvas", "description": "Find open canvas space near a node or the full document." },
+        { "name": "get_editor_state", "description": "Inspect the active Pencil editor and selection." },
+        { "name": "get_guidelines", "description": "Load Pencil guides and style presets." },
+        { "name": "get_screenshot", "description": "Render a screenshot of a specific node." },
+        { "name": "get_variables", "description": "Read document variables and themes." },
+        { "name": "open_document", "description": "Open an existing .pen document or create a new one." },
+        { "name": "replace_all_matching_properties", "description": "Bulk replace repeated style or layout properties." },
+        { "name": "search_all_unique_properties", "description": "Inventory unique property values in a node tree." },
+        { "name": "set_variables", "description": "Write document variables and themes." },
+        { "name": "snapshot_layout", "description": "Inspect layout structure and layout problems." }
+      ]
+    },
+    {
+      "name": "cloudflare-api",
+      "status": "enabled",
+      "auth": "oauth",
+      "transport": {
+        "type": "streamable_http",
+        "url": "https://mcp.cloudflare.com/mcp"
+      },
+      "tools": [
+        { "name": "search", "description": "Search the Cloudflare OpenAPI spec for endpoints." },
+        { "name": "execute", "description": "Run JavaScript against the Cloudflare API using cloudflare.request()." }
+      ]
+    },
+    {
+      "name": "hf-mcp-server",
+      "status": "enabled",
+      "auth": "oauth",
+      "transport": {
+        "type": "streamable_http",
+        "url": "https://huggingface.co/mcp?login"
+      },
+      "tools": [
+        { "name": "dynamic_space", "description": "Discover and invoke supported Hugging Face Space tasks." },
+        { "name": "gr1_z_image_turbo_generate", "description": "Generate an image with Z-Image Turbo." },
+        { "name": "hf_doc_fetch", "description": "Fetch a chunk of Hugging Face or Gradio documentation." },
+        { "name": "hf_doc_search", "description": "Search Hugging Face or Gradio documentation." },
+        { "name": "hf_hub_query", "description": "Run structured read-only queries against the Hugging Face Hub." },
+        { "name": "hf_whoami", "description": "Return the authenticated Hugging Face user." },
+        { "name": "hub_repo_details", "description": "Fetch detailed metadata for model, dataset, or space repositories." },
+        { "name": "hub_repo_search", "description": "Search Hugging Face Hub repositories." },
+        { "name": "paper_search", "description": "Search machine learning papers on Hugging Face." },
+        { "name": "space_search", "description": "Run semantic search over Hugging Face Spaces." }
+      ]
+    },
+    {
+      "name": "vercel",
+      "status": "enabled",
+      "auth": "oauth",
+      "transport": {
+        "type": "streamable_http",
+        "url": "https://mcp.vercel.com"
+      },
+      "tools": [
+        { "name": "add_toolbar_reaction", "description": "Add an emoji reaction to a Vercel toolbar comment." },
+        { "name": "change_toolbar_thread_resolve_status", "description": "Resolve or unresolve a Vercel toolbar thread." },
+        { "name": "check_domain_availability_and_price", "description": "Check domain availability and pricing." },
+        { "name": "deploy_to_vercel", "description": "Deploy the current project to Vercel." },
+        { "name": "edit_toolbar_message", "description": "Edit an existing Vercel toolbar comment." },
+        { "name": "get_access_to_vercel_url", "description": "Create a temporary auth-bypass share link for a Vercel deployment." },
+        { "name": "get_deployment", "description": "Fetch deployment details by ID or URL." },
+        { "name": "get_deployment_build_logs", "description": "Fetch Vercel build logs." },
+        { "name": "get_project", "description": "Fetch Vercel project details." },
+        { "name": "get_runtime_logs", "description": "Query runtime logs for a Vercel project or deployment." },
+        { "name": "get_toolbar_thread", "description": "Fetch a full Vercel toolbar thread." },
+        { "name": "list_deployments", "description": "List deployments for a Vercel project." },
+        { "name": "list_projects", "description": "List accessible Vercel projects." },
+        { "name": "list_teams", "description": "List accessible Vercel teams." },
+        { "name": "list_toolbar_threads", "description": "List Vercel toolbar comment threads." },
+        { "name": "reply_to_toolbar_thread", "description": "Reply to a Vercel toolbar thread." },
+        { "name": "search_vercel_documentation", "description": "Search Vercel documentation." },
+        { "name": "web_fetch_vercel_url", "description": "Fetch a protected Vercel URL through the Vercel MCP." }
+      ]
+    }
+  ]
+}
