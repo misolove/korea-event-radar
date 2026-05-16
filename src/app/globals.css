@@ -171,12 +171,24 @@ button {
 
 .stack-xl {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
 }
 
 .stack-md {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+}
+
+.stack-xl > *,
+.stack-md > *,
+.event-grid > *,
+.filter-grid > *,
+.featured-meta > *,
+.detail-metrics > *,
+.evidence-meta > * {
+  min-width: 0;
 }
 
 /* ─────────────────────────────────────────────
@@ -1415,7 +1427,7 @@ a.verify-badge-link:active {
 
 @media (max-width: 720px) {
   .event-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .event-card.is-top1 {
@@ -1463,14 +1475,8 @@ a.verify-badge-link:active {
   }
 
   .hero-highlights {
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     padding-bottom: 2px;
-    scrollbar-width: none;
-  }
-
-  .hero-highlights::-webkit-scrollbar {
-    display: none;
   }
 
   .hero-pill {

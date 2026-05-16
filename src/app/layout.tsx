@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({
         {/* Sticky Navigation */}
         <header className="nav" role="banner">
           <div className="nav-inner">
-            <a className="logo" href="/" aria-label="Seminar Scout AI 홈">
+            <Link className="logo" href="/" aria-label="Seminar Scout AI 홈">
               <span className="logo-mark" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="12" cy="12" r="3"/>
@@ -43,7 +44,7 @@ export default function RootLayout({
                 </svg>
               </span>
               Scout
-            </a>
+            </Link>
             <div className="nav-spacer" />
           </div>
         </header>
