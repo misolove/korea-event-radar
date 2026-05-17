@@ -169,9 +169,9 @@ export function EventCard({ event }: EventCardProps) {
           </div>
           <div className="ai-curation-row">
             <span className="ai-curation-label">참석 이유</span>
-            <span className="ai-curation-value">{curation.reasonToAttend}</span>
+            <span className="ai-curation-value">{event.summary ?? curation.reasonToAttend}</span>
           </div>
-          {curation.caution && (
+          {curation.caution && !event.summary && (
             <div className="ai-curation-row ai-curation-caution">
               <span className="ai-curation-label">⚠ 주의</span>
               <span className="ai-curation-value">{curation.caution}</span>

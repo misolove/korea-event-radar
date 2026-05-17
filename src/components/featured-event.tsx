@@ -84,7 +84,7 @@ export function FeaturedEvent({ event, freeCount }: FeaturedEventProps) {
       <div className="featured-event-copy">
         <h2>{event.title}</h2>
         <p className="featured-summary">{event.summary ?? "상세 설명은 원문 페이지에서 바로 확인할 수 있습니다."}</p>
-        <p className="featured-curation-reason">{curation.reasonToAttend}</p>
+        {!event.summary && <p className="featured-curation-reason">{curation.reasonToAttend}</p>}
         <div className="event-badges">
           <StatusChip kind="status" value={event.registrationStatus} />
           <StatusChip kind="price" value={event.priceType} />
