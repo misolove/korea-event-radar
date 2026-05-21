@@ -169,22 +169,34 @@ export async function GET(req: NextRequest) {
   let cleanedCount = 0;
   try {
     const yesterday = new Date(Date.now() - 86400_000);
-    const allForCleanup = await getDb().select({ id: events.id, startsAt: events.startsAt, registrationStatus: events.registrationStatus, title: events.title }).from(events);
+    const oneWeekAgo = new Date(Date.now() - 7 * 86400_000);
+    const allForCleanup = await getDb().select({
+      id: events.id,
+      startsAt: events.startsAt,
+      registrationStatus: events.registrationStatus,
+      title: events.title,
+      createdAt: events.createdAt,
+    }).from(events);
+
     const toDelete = allForCleanup
       .filter(e => {
-        const isPast = e.startsAt && e.startsAt < yesterday;
-        const isMarkedPast = e.registrationStatus === 'past';
-        const looksEnded = /종료|ended/i.test(e.title);
-        return isPast || isMarkedPast || looksEnded;
+        const isPast = e.startsAt && e.startsAt < yesterday;          // 시작일이 어제 이전
+        const isMarkedPast = e.registrationStatus === 'past';          // Claude가 past로 마킹
+        const looksEnded = /종료|ended/i.test(e.title);               // 제목에 종료 포함
+        const isNullDateOld = !e.startsAt && e.createdAt && e.createdAt < oneWeekAgo; // 날짜 없고 7일 이상
+        return isPast || isMarkedPast || looksEnded || isNullDateOld;
       })
       .map(e => e.id);
+
     if (toDelete.length > 0) {
       for (const id of toDelete) {
         await getDb().delete(events).where(eq(events.id, id));
       }
       cleanedCount = toDelete.length;
     }
-  } catch {}
+  } catch (err) {
+    console.error('cleanup error:', err);
+  }
 
   return NextResponse.json({
     ok: true,
