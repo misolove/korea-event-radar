@@ -12,11 +12,12 @@ import {
   pickSafeRegistrationUrl,
   pickMeta,
 } from "@/ingestion/extractors/common";
+import { normalizeWhitespace } from "@/lib/text";
 
 // ── EventUs 공개 검색 API를 이용한 이벤트 발굴 ───────────────────
-// api.event-us.kr/api/v1/engine/suggest 는 인증 없이 접근 가능
+// api.event-us.kr/api/v1/engine/search (POST) 는 인증 없이 접근 가능하며 subdomain을 제공함
 const EVENTUS_SEARCH_QUERIES = ["AI 세미나", "클라우드", "개발자", "데이터", "스타트업", "IT 밋업"];
-const EVENTUS_API = "https://api.event-us.kr/api/v1/engine/suggest";
+const EVENTUS_API = "https://api.event-us.kr/api/v1/engine/search";
 
 export async function discoverEventUsViaApi(): Promise<string[]> {
   const seen = new Set<string>();
@@ -24,23 +25,24 @@ export async function discoverEventUsViaApi(): Promise<string[]> {
 
   for (const query of EVENTUS_SEARCH_QUERIES) {
     try {
-      const res = await fetch(
-        `${EVENTUS_API}?query=${encodeURIComponent(query)}&size=20`,
-        {
-          headers: {
-            "Accept": "application/json",
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124 Safari/537.36",
-          },
-          signal: AbortSignal.timeout(8000),
-        }
-      );
+      const res = await fetch(EVENTUS_API, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124 Safari/537.36",
+        },
+        body: JSON.stringify({ query }),
+        signal: AbortSignal.timeout(8000),
+      });
       if (!res.ok) continue;
-      const data = await res.json() as { results?: Array<{ id?: { raw?: string } }> };
+      const data = await res.json() as { results?: Array<{ id?: { raw?: string }, subdomain?: { raw?: string } }> };
       for (const item of data.results ?? []) {
         const id = item.id?.raw;
-        if (id && !seen.has(id)) {
+        const subdomain = item.subdomain?.raw;
+        if (id && subdomain && !seen.has(id)) {
           seen.add(id);
-          urls.push(`https://event-us.kr/event/${id}`);
+          urls.push(`https://event-us.kr/${subdomain}/event/${id}`);
         }
       }
     } catch {
@@ -92,18 +94,38 @@ export function extractEventUs(url: string, html: string, discoveredFromUrl: str
   const dateRange = parseKoreanDateRange(dateText ?? text, { yearHint });
   const location = extractLocationInfo(structured, locationText);
 
+  // subdomain을 URL에서 파싱하여 정확한 organizer 앵커를 찾음
+  const subdomainMatch = url.match(/event-us\.kr\/([^/]+)\/event\/\d+/);
+  const subdomain = subdomainMatch ? subdomainMatch[1] : null;
+
+  let organizer: string | null = null;
+  if (subdomain) {
+    const candidates = $(`a[href="/${subdomain}/event"]`)
+      .map((_, element) => $(element).text().trim())
+      .get()
+      .map(t => normalizeWhitespace(t))
+      .filter(t => t.length >= 2);
+    if (candidates.length > 0) {
+      organizer = candidates[candidates.length - 1];
+    }
+  }
+
+  if (!organizer) {
+    organizer =
+      $("a")
+        .filter((_, element) => $(element).text().trim().length > 1)
+        .slice(0, 1)
+        .text()
+        .trim() || extractOrganizerName(structured?.organizer);
+  }
+
   return {
     title,
     summary:
       $("meta[property='og:description']").attr("content") ??
       String(structured?.description ?? "").trim() ??
       null,
-    organizer:
-      $("a")
-        .filter((_, element) => $(element).text().trim().length > 1)
-        .slice(0, 1)
-        .text()
-        .trim() || extractOrganizerName(structured?.organizer),
+    organizer,
     primarySource: "EventUs",
     primarySourceUrl: url,
     registrationUrl: externalRegistrationUrl,

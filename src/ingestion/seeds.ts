@@ -15,6 +15,15 @@ export const sourceSeeds: SourceSeed[] = [
     tags: ["discovery"],
   },
   {
+    id: "ticketa-home",
+    label: "Ticketa 홈",
+    url: "https://ticketa.co",
+    sourceName: "Ticketa",
+    sourceKind: "platform",
+    mode: "list-page",
+    tags: ["discovery"],
+  },
+  {
     id: "meetup-find-seoul-ai",
     label: "Meetup 서울 AI 검색",
     url: "https://www.meetup.com/ko-KR/find/?keywords=ai&location=kr--seoul",

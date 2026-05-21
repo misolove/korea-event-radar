@@ -197,46 +197,83 @@ function extractCardLinks(baseUrl: string, contentHtml: string) {
   return { registrationUrl: normalizeUrl(registrationUrl), detailUrl: normalizeUrl(detailUrl) };
 }
 
-export function discoverFastCampusCards(baseUrl: string, html: string): FastCampusSeminarCard[] {
-  const flightPayload = extractNextFlightPayload(html);
-  if (!flightPayload) {
+export async function discoverFastCampusCards(baseUrl: string, html: string): Promise<FastCampusSeminarCard[]> {
+  const matches = [...html.matchAll(/(?:courseId|course-id)[^\d]{1,20}(\d+)/gi)];
+  const courseIds = [...new Set(matches.map(m => m[1]))];
+  if (courseIds.length === 0) {
     return [];
   }
 
-  const textRecords = extractTextRecords(flightPayload);
-  const cards = extractValues(flightPayload)
-    .map((values): FastCampusSeminarCard | null => {
-      if (typeof values.title !== "string" || typeof values.content !== "string") {
-        return null;
+  // chunk courseIds to avoid Request-URI Too Large
+  const chunkSize = 15;
+  const chunks: string[][] = [];
+  for (let i = 0; i < courseIds.length; i += chunkSize) {
+    chunks.push(courseIds.slice(i, i + chunkSize));
+  }
+
+  const cards: FastCampusSeminarCard[] = [];
+
+  await Promise.all(chunks.map(async (chunk) => {
+    const queryParams = chunk.map(id => `id=${id}`).join("&");
+    const coursesUrl = `https://fastcampus.co.kr/.api/courses?${queryParams}`;
+    const productsUrl = `https://fastcampus.co.kr/.api/courses/products?${queryParams}`;
+
+    const [resCourses, resProducts] = await Promise.all([
+      fetch(coursesUrl).catch(() => null),
+      fetch(productsUrl).catch(() => null),
+    ]);
+
+    if (!resCourses?.ok || !resProducts?.ok) {
+      return;
+    }
+
+    try {
+      const coursesJson = await resCourses.json() as any;
+      const productsJson = await resProducts.json() as any;
+
+      const coursesList = coursesJson.data || [];
+      const productsMap = productsJson.data || {};
+
+      for (const course of coursesList) {
+        const courseId = course.id;
+        // Collect only open/ongoing/upcoming seminars
+        if (course.state !== "READY" && course.state !== "ONGOING") {
+          continue;
+        }
+
+        const productsList = productsMap[String(courseId)] || productsMap[Number(courseId)] || [];
+        const product = productsList[0] || {};
+
+        const title = course.publicTitle || product.title || course.title || "";
+        const contentText = product.description || "";
+        const contentHtml = product.description || "";
+
+        const slug = course.slug;
+        const url = slug 
+          ? `https://fastcampus.co.kr/${slug}` 
+          : `https://fastcampus.co.kr/products/${courseId}`;
+
+        const dateText = extractFastCampusDateText(contentText);
+        const startsAt = parseFastCampusStartDate(contentText);
+        const deliveryType = detectDeliveryType(contentText);
+        const imageUrl = course.desktopCardAsset || product.desktopCardAsset || null;
+
+        cards.push({
+          title,
+          contentHtml,
+          contentText,
+          registrationUrl: url,
+          detailUrl: url,
+          imageUrl,
+          startsAt,
+          dateText,
+          deliveryType,
+        });
       }
-
-      const contentHtml = resolveContent(values.content, textRecords);
-      if (!contentHtml || !contentHtml.includes("무료 세미나 신청하기")) {
-        return null;
-      }
-
-      const { registrationUrl, detailUrl } = extractCardLinks(baseUrl, contentHtml);
-      if (!registrationUrl) {
-        return null;
-      }
-
-      const title = htmlToText(values.title);
-      const contentText = htmlToText(contentHtml);
-      const dateText = extractFastCampusDateText(contentText);
-
-      return {
-        title,
-        contentHtml,
-        contentText,
-        registrationUrl,
-        detailUrl,
-        imageUrl: typeof values.imageUrl === "string" ? values.imageUrl : null,
-        startsAt: parseFastCampusStartDate(contentText),
-        dateText,
-        deliveryType: detectDeliveryType(contentText),
-      };
-    })
-    .filter((card): card is FastCampusSeminarCard => Boolean(card));
+    } catch {
+      // ignore mapping/parse errors for this chunk
+    }
+  }));
 
   const byUrl = new Map<string, FastCampusSeminarCard>();
   for (const card of cards) {
@@ -246,8 +283,9 @@ export function discoverFastCampusCards(baseUrl: string, html: string): FastCamp
   return [...byUrl.values()];
 }
 
-export function discoverFastCampusCandidates(seed: SourceSeed, html: string): DiscoveredCandidate[] {
-  return discoverFastCampusCards(seed.url, html).map((card) => ({
+export async function discoverFastCampusCandidates(seed: SourceSeed, html: string): Promise<DiscoveredCandidate[]> {
+  const cards = await discoverFastCampusCards(seed.url, html);
+  return cards.map((card) => ({
     url: card.detailUrl ?? card.registrationUrl,
     sourceName: seed.sourceName,
     sourceKind: seed.sourceKind,

@@ -11,6 +11,7 @@ import { discoverGenericLinks, extractGeneric } from "@/ingestion/extractors/gen
 import { discoverLumaLinks, extractLuma } from "@/ingestion/extractors/luma";
 import { discoverMeetupLinks, extractMeetup } from "@/ingestion/extractors/meetup";
 import { discoverOnOffMixLinks, discoverOnOffMixViaCategories, extractOnOffMix } from "@/ingestion/extractors/onoffmix";
+import { discoverTicketa, extractTicketa } from "@/ingestion/extractors/ticketa";
 
 export async function discoverCandidates(seed: SourceSeed): Promise<DiscoveredCandidate[]> {
   if (seed.mode === "event-page") {
@@ -27,7 +28,7 @@ export async function discoverCandidates(seed: SourceSeed): Promise<DiscoveredCa
   // ── FastCampus: Next flight payload에 포함된 오픈세미나 카드 발굴 ──────
   if (seed.sourceName === "FastCampus" && seed.mode === "list-page") {
     const html = await fetchHtml(seed.url);
-    return discoverFastCampusCandidates(seed, html);
+    return await discoverFastCampusCandidates(seed, html);
   }
 
   // ── EventUs: API 기반 발굴 (list-page 모드) ──────────────────────
@@ -53,6 +54,17 @@ export async function discoverCandidates(seed: SourceSeed): Promise<DiscoveredCa
     ]);
     const allLinks = [...new Set([...categoryLinks, ...htmlLinks])];
     return allLinks.map(url => ({
+      url,
+      sourceName: seed.sourceName,
+      sourceKind: seed.sourceKind,
+      discoveredFromUrl: seed.url,
+    }));
+  }
+
+  // ── Ticketa: Supabase API 기반 발굴 ──────────────────────────────
+  if (seed.sourceName === "Ticketa" && seed.mode === "list-page") {
+    const urls = await discoverTicketa(seed, "");
+    return urls.map(url => ({
       url,
       sourceName: seed.sourceName,
       sourceKind: seed.sourceKind,
@@ -101,6 +113,9 @@ export async function extractCandidate(candidate: DiscoveredCandidate): Promise<
   }
   if (host.includes("eventbrite.com")) {
     return extractEventbrite(candidate.url, html, candidate.discoveredFromUrl);
+  }
+  if (host.includes("ticketa.co")) {
+    return extractTicketa(candidate.url, html, candidate.discoveredFromUrl);
   }
 
   return extractGeneric(
