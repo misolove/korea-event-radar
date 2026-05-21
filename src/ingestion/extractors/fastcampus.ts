@@ -62,14 +62,57 @@ function extractTextRecords(flightPayload: string) {
 
 function extractValues(flightPayload: string): FastCampusValues[] {
   const values: FastCampusValues[] = [];
-  const valuesPattern = /"values":(\{(?:"(?:\\.|[^"\\])*"|[^{}])*\}),"meta":/g;
+  let pos = 0;
 
-  for (const match of flightPayload.matchAll(valuesPattern)) {
-    try {
-      values.push(JSON.parse(match[1]) as FastCampusValues);
-    } catch {
-      continue;
+  while (true) {
+    const idx = flightPayload.indexOf('"values":{', pos);
+    if (idx === -1) {
+      break;
     }
+
+    const start = idx + '"values":'.length;
+    let depth = 0;
+    let inStr = false;
+    let escape = false;
+    let end = start;
+
+    for (let i = start; i < flightPayload.length; i++) {
+      const ch = flightPayload[i];
+      if (escape) {
+        escape = false;
+        continue;
+      }
+      if (ch === "\\") {
+        escape = true;
+        continue;
+      }
+      if (ch === '"') {
+        inStr = !inStr;
+        continue;
+      }
+      if (!inStr) {
+        if (ch === "{") {
+          depth++;
+        } else if (ch === "}") {
+          depth--;
+          if (depth === 0) {
+            end = i + 1;
+            break;
+          }
+        }
+      }
+    }
+
+    if (depth === 0 && end > start) {
+      try {
+        const chunk = flightPayload.slice(start, end);
+        values.push(JSON.parse(chunk) as FastCampusValues);
+      } catch {
+        // ignore
+      }
+    }
+
+    pos = start + 1;
   }
 
   return values;

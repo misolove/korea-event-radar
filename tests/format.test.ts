@@ -1,7 +1,16 @@
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { inferPastStatus, isPastEvent } from "@/lib/format";
 
 describe("date visibility helpers", () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-04-01T00:00:00+09:00"));
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
   it("treats an event as past when it ended before now", () => {
     expect(
       isPastEvent(

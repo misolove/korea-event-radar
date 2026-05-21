@@ -8,3 +8,4 @@ test-results
 drizzle/meta
 .vercel
 .env*.local
+*.swp
