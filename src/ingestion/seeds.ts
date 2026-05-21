@@ -41,6 +41,15 @@ export const sourceSeeds: SourceSeed[] = [
     mode: "list-page",
     tags: ["aws", "community", "channel"],
   },
+  {
+    id: "fastcampus-openseminar",
+    label: "FastCampus 오픈세미나",
+    url: "https://fastcampus.co.kr/openseminar_new",
+    sourceName: "FastCampus",
+    sourceKind: "official",
+    mode: "list-page",
+    tags: ["fastcampus", "seminar", "ai", "dev", "online"],
+  },
   // 아래 씨드들은 2025년 지난 행사 — 제거 (2026-05-16)
   // eventus-upstage-ai-talk (2024-09-11), eventus-aws-community-day (2025-11),
   // gdg-devfest-cloud-seoul (2025-11), gdg-io-extended-seoul (2025-08),

@@ -2,6 +2,11 @@ import type { DiscoveredCandidate, ExtractedEventDraft, SourceSeed } from "@/ing
 import { fetchHtml } from "@/ingestion/fetch";
 import { discoverEventbriteLinks, extractEventbrite } from "@/ingestion/extractors/eventbrite";
 import { discoverEventUsLinks, discoverEventUsViaApi, extractEventUs } from "@/ingestion/extractors/eventus";
+import {
+  discoverFastCampusCandidates,
+  extractFastCampusCard,
+  readFastCampusCardPayload,
+} from "@/ingestion/extractors/fastcampus";
 import { discoverGenericLinks, extractGeneric } from "@/ingestion/extractors/generic";
 import { discoverLumaLinks, extractLuma } from "@/ingestion/extractors/luma";
 import { discoverMeetupLinks, extractMeetup } from "@/ingestion/extractors/meetup";
@@ -17,6 +22,12 @@ export async function discoverCandidates(seed: SourceSeed): Promise<DiscoveredCa
         discoveredFromUrl: null,
       },
     ];
+  }
+
+  // ── FastCampus: Next flight payload에 포함된 오픈세미나 카드 발굴 ──────
+  if (seed.sourceName === "FastCampus" && seed.mode === "list-page") {
+    const html = await fetchHtml(seed.url);
+    return discoverFastCampusCandidates(seed, html);
   }
 
   // ── EventUs: API 기반 발굴 (list-page 모드) ──────────────────────
@@ -68,6 +79,11 @@ export async function discoverCandidates(seed: SourceSeed): Promise<DiscoveredCa
 }
 
 export async function extractCandidate(candidate: DiscoveredCandidate): Promise<ExtractedEventDraft | null> {
+  const fastCampusCard = readFastCampusCardPayload(candidate);
+  if (fastCampusCard) {
+    return extractFastCampusCard(fastCampusCard, candidate.discoveredFromUrl);
+  }
+
   const html = await fetchHtml(candidate.url);
   const host = new URL(candidate.url).hostname;
 

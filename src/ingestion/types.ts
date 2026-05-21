@@ -25,6 +25,7 @@ export type DiscoveredCandidate = {
   sourceName: string;
   sourceKind: SourceKind;
   discoveredFromUrl: string | null;
+  payload?: Record<string, unknown>;
 };
 
 export type EvidenceDraft = {
