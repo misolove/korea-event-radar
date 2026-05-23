@@ -12,6 +12,8 @@ describe("invalid cleanup", () => {
         registrationUrl: null,
         startsAt: null,
         endsAt: null,
+        summary: null,
+        organizer: null,
       },
       {
         id: "2",
@@ -21,6 +23,8 @@ describe("invalid cleanup", () => {
         registrationUrl: null,
         startsAt: null,
         endsAt: null,
+        summary: null,
+        organizer: null,
       },
       {
         id: "3",
@@ -30,6 +34,8 @@ describe("invalid cleanup", () => {
         registrationUrl: null,
         startsAt: new Date("2026-04-10T09:00:00+09:00"),
         endsAt: new Date("2026-04-10T11:00:00+09:00"),
+        summary: null,
+        organizer: null,
       },
     ]);
 

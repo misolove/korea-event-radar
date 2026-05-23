@@ -139,15 +139,16 @@ function looksKoreanRelevant(text: string): boolean {
   return /(korea|seoul|판교|서울|부산|한국|대한민국|kr\b|광화문|강남)/i.test(text);
 }
 
-function looksTechRelevant(text: string): boolean {
+export function looksTechRelevant(text: string): boolean {
   return /(ai|developer|software|cloud|data|startup|product|engineering|programming|인공지능|개발자|데이터|클라우드|소프트웨어|it\b|devops|mlops|kubernetes|docker|python|javascript|typescript|react|llm|머신러닝|딥러닝|보안|security|backend|frontend)/i.test(
     text,
   );
 }
 
-// 명백히 IT/개발과 무관한 키워드 — 이것들이 제목에 있으면 필터
-function looksNonTech(title: string): boolean {
-  return /(바이오유스\s*캠프|계획기부|유산기부|힐링콘서트|강형욱|이대호|부동산|재테크|현금\s*파이프라인|커피\s*포럼|바이어\s*응대|출판.*수출|비영리.*법령|근로기준법|경제.*클래스|돈\s*공부|킥스타터.*크라우드|음악.*작곡|한국위성|원폭|핵무기|WISE\s*Vocabulary|경암바이오|의약학|국세통계|세무.*신고|노무.*실무|비영리.*윤리|자원봉사|봉사활동|사회복지|평생교육|시민교육|통장.*꿀|꿀.*통장|돈.*버는|재무.*설계|보험.*설계|금융.*상품|주식.*투자|코인.*투자|부업.*강의|N잡|사이드잡|창업.*자금|소상공인|자영업|공무원.*시험|취업.*스펙|어학.*시험|영어.*회화|중국어|일본어|요리.*클래스|베이킹|미술.*클래스|드로잉|수채화|캘리그래피|명상|요가|필라테스|다이어트|헬스.*강의|운동.*프로그램|독서.*모임|글쓰기.*강의|시.*창작|소설.*창작|드라마.*제작|영화.*감상|음악.*감상|클래식.*공연|재즈.*공연|콘서트|뮤지컬|연극|무용|전시.*관람|미술관|박물관|역사.*강의|인문학|철학.*강의|종교|기도|예배)/i.test(title);
+// 명백히 IT/개발과 무관한 키워드 — 이것들이 제목이나 요약에 있으면 필터
+export function looksNonTech(title: string, summary: string = ""): boolean {
+  const textToSearch = `${title} ${summary}`;
+  return /(바이오유스\s*캠프|계획기부|유산기부|힐링콘서트|강형욱|이대호|부동산|재테크|다주택자|보증금|자산.*관리|현금\s*파이프라인|커피\s*포럼|바이어\s*응대|출판.*수출|비영리.*법령|근로기준법|경제.*클래스|돈\s*공부|킥스타터.*크라우드|음악.*작곡|한국위성|원폭|핵무기|WISE\s*Vocabulary|경암바이오|의약학|국세통계|세무.*신고|노무.*실무|비영리.*윤리|자원봉사|봉사활동|사회복지|평생교육|시민교육|통장.*꿀|꿀.*통장|돈.*버는|재무.*설계|보험.*설계|금융.*상품|주식.*투자|코인.*투자|부업.*강의|N잡|사이드잡|창업.*자금|소상공인|자영업|공무원.*시험|취업.*스펙|어학.*시험|영어.*회화|중국어|일본어|요리.*클래스|베이킹|미술.*클래스|드로잉|수채화|캘리그래피|명상|요가|필라테스|다이어트|헬스.*강의|운동.*프로그램|독서.*모임|글쓰기.*강의|시.*창작|소설.*창작|드라마.*제작|영화.*감상|음악.*감상|클래식.*공연|재즈.*공연|콘서트|뮤지컬|연극|무용|전시.*관람|미술관|박물관|역사.*강의|인문학|철학.*강의|종교|기도|예배|절세|세무사|포토그라피|야외스냅|스냅|웨딩사진|보드게임|board\s*game|언어교환|language\s*exchange|친목|소셜모임|파티|party)/i.test(textToSearch);
 }
 
 export function normalizeExtractedEvent(draft: ExtractedEventDraft): ExtractedEventDraft | null {
@@ -161,7 +162,7 @@ export function normalizeExtractedEvent(draft: ExtractedEventDraft): ExtractedEv
   }
 
   // ── 명백한 비IT 행사 필터 ──
-  if (looksNonTech(title)) {
+  if (looksNonTech(title, stripHtml(draft.summary) || "")) {
     return null;
   }
 
@@ -222,9 +223,15 @@ export function normalizeExtractedEvent(draft: ExtractedEventDraft): ExtractedEv
     return rawPrice;
   })();
 
+  const coreCorpus = [
+    draft.title,
+    draft.summary ?? "",
+    draft.organizer ?? "",
+  ].join(" ");
+
   const deliveryType = draft.deliveryType ?? detectDeliveryType(textCorpus);
   const eventKind = draft.eventKind ?? detectEventKind(textCorpus);
-  const topicTags = uniqueStrings([...(draft.topicTags ?? []), ...detectTopics(textCorpus)]);
+  const topicTags = uniqueStrings([...(draft.topicTags ?? []), ...detectTopics(coreCorpus)]);
   const confidenceScore = Math.min(
     99,
     Math.max(
@@ -234,12 +241,12 @@ export function normalizeExtractedEvent(draft: ExtractedEventDraft): ExtractedEv
           (detectedStatus.origin === "direct" ? 18 : 0) +
           (detectedPrice.priceType !== "unknown" ? 10 : 0) +
           (looksKoreanRelevant(textCorpus) ? 8 : 0) +
-          (looksTechRelevant(textCorpus) ? 8 : 0),
+          (looksTechRelevant(coreCorpus) ? 8 : 0),
     ),
   );
 
   const isRelevant =
-    draft.isRelevant ?? (looksTechRelevant(textCorpus) && looksKoreanRelevant(textCorpus));
+    draft.isRelevant ?? (looksTechRelevant(coreCorpus) && looksKoreanRelevant(textCorpus));
 
   // ── URL tracking param 제거 (Meetup recId/recSource/searchId/eventOrigin 등) ──
   const cleanUrl = (raw: string | null): string | null => {
