@@ -7,7 +7,7 @@ import type {
   StatusOrigin,
 } from "@/lib/event-model";
 import { looksLikeJunkEventPage } from "@/ingestion/extractors/common";
-import { slugifyText, uniqueStrings } from "@/lib/text";
+import { slugifyText, uniqueStrings, stripHtml } from "@/lib/text";
 
 const closedStatusPatterns = [/sold out/i, /application closed/i, /모집마감/i, /접수마감/i, /마감/i];
 const waitlistStatusPatterns = [/waitlist/i, /대기/i];
@@ -259,7 +259,7 @@ export function normalizeExtractedEvent(draft: ExtractedEventDraft): ExtractedEv
     ...draft,
     slug: draft.slug ?? slugifyText(title),
     title,
-    summary: draft.summary?.trim() || null,
+    summary: stripHtml(draft.summary) || null,
     organizer: draft.organizer?.trim() || null,
     city: draft.city?.trim() || null,
     venueName: draft.venueName?.trim() || null,

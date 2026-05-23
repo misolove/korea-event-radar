@@ -200,6 +200,11 @@ function matchesFilters(event: EventSummary, filters: ListEventsInput): boolean 
     return false;
   }
 
+  // 등록마감(closed) 행사는 기본 목록에서 숨김 (registrationStatus 필터로 명시 요청 시에만 표시)
+  if (!shouldIncludePast && !filters.registrationStatus && event.registrationStatus === "closed") {
+    return false;
+  }
+
   if (filters.q) {
     const haystack = [event.title, event.summary, event.organizer, event.topicTags.join(" ")]
       .filter(Boolean)
