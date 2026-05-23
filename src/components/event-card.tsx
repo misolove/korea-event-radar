@@ -161,23 +161,26 @@ export function EventCard({ event }: EventCardProps) {
           ))}
         </div>
 
-        {/* AI curation panel */}
-        <div className="ai-curation-panel">
-          <div className="ai-curation-row">
-            <span className="ai-curation-label">추천 대상</span>
-            <span className="ai-curation-value">{curation.recommendedAudience}</span>
-          </div>
-          <div className="ai-curation-row">
-            <span className="ai-curation-label">참석 이유</span>
-            <span className="ai-curation-value">{event.summary ?? curation.reasonToAttend}</span>
-          </div>
-          {curation.caution && !event.summary && (
-            <div className="ai-curation-row ai-curation-caution">
-              <span className="ai-curation-label">⚠ 주의</span>
-              <span className="ai-curation-value">{curation.caution}</span>
+        {/* AI curation panel (Collapsible) */}
+        <details className="ai-curation-details">
+          <summary className="ai-curation-summary" />
+          <div className="ai-curation-content">
+            <div className="ai-curation-row">
+              <span className="ai-curation-label">추천 대상</span>
+              <span className="ai-curation-value">{curation.recommendedAudience}</span>
             </div>
-          )}
-        </div>
+            <div className="ai-curation-row">
+              <span className="ai-curation-label">참석 이유</span>
+              <span className="ai-curation-value">{event.summary ?? curation.reasonToAttend}</span>
+            </div>
+            {curation.caution && !event.summary && (
+              <div className="ai-curation-row ai-curation-caution">
+                <span className="ai-curation-label">⚠ 주의</span>
+                <span className="ai-curation-value">{curation.caution}</span>
+              </div>
+            )}
+          </div>
+        </details>
       </div>
 
       {/* Footer: place + price + status badge */}
