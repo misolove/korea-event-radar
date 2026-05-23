@@ -1,4 +1,5 @@
 import { looksLikeJunkEventPage } from "@/ingestion/extractors/common";
+import { looksNonTech, looksTechRelevant } from "@/ingestion/normalize";
 
 export type InvalidCleanupEventLike = {
   id: string;
@@ -8,6 +9,8 @@ export type InvalidCleanupEventLike = {
   registrationUrl: string | null;
   startsAt: Date | null;
   endsAt: Date | null;
+  summary: string | null;
+  organizer: string | null;
 };
 
 export function selectInvalidCleanupCandidates(events: InvalidCleanupEventLike[]) {
@@ -19,6 +22,20 @@ export function selectInvalidCleanupCandidates(events: InvalidCleanupEventLike[]
     if (
       looksLikeJunkEventPage(event.title, event.primarySourceUrl, event.startsAt, event.endsAt)
     ) {
+      return true;
+    }
+
+    const coreCorpus = [
+      event.title,
+      event.summary ?? "",
+      event.organizer ?? "",
+    ].join(" ");
+
+    if (looksNonTech(event.title, event.summary ?? "")) {
+      return true;
+    }
+
+    if (!looksTechRelevant(coreCorpus)) {
       return true;
     }
 
