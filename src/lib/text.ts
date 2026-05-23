@@ -42,6 +42,20 @@ export function uniqueStrings(values: Array<string | null | undefined>): string[
   return [...new Set(values.map((value) => normalizeWhitespace(value)).filter(Boolean))];
 }
 
+export function stripHtml(value: string | null | undefined): string | null {
+  if (!value) return null;
+  return value
+    .replace(/<[^>]*>?/gm, "") // Remove HTML tags
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function decodeSlug(value: string): string {
   try {
     return decodeURIComponent(value);
