@@ -9,3 +9,9 @@ drizzle/meta
 .vercel
 .env*.local
 *.swp
+
+# Secrets — never commit real keys
+*.secret
+secrets/
+.secrets
+.env.production
