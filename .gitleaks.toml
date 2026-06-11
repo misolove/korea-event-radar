@@ -1,0 +1,10 @@
+title = "korea-event-radar gitleaks config"
+
+[allowlist]
+  description = "Known false positives"
+  regexes = [
+    '''YOUR_O.*''',
+  ]
+  paths = [
+    '''docs/runbook\.md''',
+  ]
