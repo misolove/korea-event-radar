@@ -2,7 +2,7 @@ import type { DiscoveredCandidate, ExtractedEventDraft, SourceSeed } from "@/ing
 import { normalizeWhitespace } from "@/lib/text";
 
 const TICKETA_SUPABASE_URL = "https://vlizxsubseudvtswwsjd.supabase.co/rest/v1";
-const TICKETA_API_KEY = "sb_publishable_TqUlbQeSfm87bU4HlcXC-g_eROljM1k";
+const TICKETA_API_KEY = process.env.TICKETA_API_KEY ?? "";
 
 interface SupabaseVenue {
   id: number;
