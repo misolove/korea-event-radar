@@ -82,7 +82,7 @@
 - 비IT: 비영리윤리교육, 일본어모임, 당도보장통장, 국세통계센터
 
 ### [2026-05-17] Cron 첫 정상 작동 확인
-- 인증 방식 수정: Vercel Cron은 `User-Agent: vercel-cron/1.0` (Bearer 토큰 없음)
+- 인증 방식 수정: Cron 엔드포인트는 `Authorization: Bearer {OPS_SECRET}`만 허용
 - OPS_SECRET 재발급 (이전 값이 Stripe 키였음)
 - Opus 요약문(summary) DB 저장 확인
 
