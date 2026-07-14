@@ -1,5 +1,6 @@
 import type { DiscoveredCandidate, ExtractedEventDraft, SourceSeed } from "@/ingestion/types";
-import { buildAbsoluteUrl, parseHtml } from "@/ingestion/extractors/common";
+import { buildAbsoluteUrl, parseDateTimeRangeText, parseHtml } from "@/ingestion/extractors/common";
+import { extractStartDateHint } from "@/lib/date-hint";
 import { normalizeWhitespace, normalizeUrl } from "@/lib/text";
 
 const FASTCAMPUS_LIST_URL = "https://fastcampus.co.kr/openseminar_new";
@@ -144,8 +145,30 @@ function extractFastCampusDateText(text: string) {
   return (
     text.match(/20\d{2}\.\s*\d{1,2}\.\s*\d{1,2}.{0,70}?(?:온라인|오프라인|온\/오프라인)?\s*세미나/)?.[0] ??
     text.match(/20\d{2}\.\s*\d{1,2}\.\s*\d{1,2}.{0,50}?\d{1,2}:\d{2}/)?.[0] ??
+    text.match(/20\d{2}년\s*\d{1,2}월\s*\d{1,2}일.{0,30}?\d{1,2}:\d{2}(?:\s*~\s*\d{1,2}:\d{2})?/)?.[0] ??
+    text.match(/\d{1,2}월\s*\d{1,2}일\s*\([^)]{1,3}\)\s*\d{1,2}:\d{2}(?:\s*~\s*\d{1,2}:\d{2})?/)?.[0] ??
     null
   );
+}
+
+// 설명 → 공지(publicNotice) → 코스 openAt 순으로 세미나 시작 일시를 확정한다.
+export function resolveFastCampusStartDate(text: string, openAt?: unknown): Date | null {
+  const parsed =
+    parseFastCampusStartDate(text) ??
+    parseDateTimeRangeText(text).startsAt ??
+    extractStartDateHint([text]);
+  if (parsed) {
+    return parsed;
+  }
+
+  if (typeof openAt === "string") {
+    const fallback = new Date(openAt);
+    if (!Number.isNaN(fallback.getTime())) {
+      return fallback;
+    }
+  }
+
+  return null;
 }
 
 function detectDeliveryType(text: string): FastCampusSeminarCard["deliveryType"] {
@@ -253,8 +276,10 @@ export async function discoverFastCampusCards(baseUrl: string, html: string): Pr
           ? `https://fastcampus.co.kr/${slug}` 
           : `https://fastcampus.co.kr/products/${courseId}`;
 
-        const dateText = extractFastCampusDateText(contentText);
-        const startsAt = parseFastCampusStartDate(contentText);
+        const noticeText = typeof course.publicNotice === "string" ? course.publicNotice : "";
+        const dateSourceText = [contentText, noticeText].filter(Boolean).join("\n");
+        const dateText = extractFastCampusDateText(dateSourceText);
+        const startsAt = resolveFastCampusStartDate(dateSourceText, course.openAt);
         const deliveryType = detectDeliveryType(contentText);
         const imageUrl = course.desktopCardAsset || product.desktopCardAsset || null;
 

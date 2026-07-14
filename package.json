@@ -15,6 +15,7 @@
     "cleanup:past": "tsx src/maintenance/cleanup-past-events.ts",
     "cleanup:invalid": "tsx src/maintenance/cleanup-invalid-events.ts",
     "refresh:source": "tsx src/maintenance/refresh-source-events.ts",
+  "backfill:fastcampus": "tsx src/maintenance/backfill-fastcampus-dates.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push"

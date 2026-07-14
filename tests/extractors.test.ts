@@ -115,6 +115,63 @@ describe("domain extractors", () => {
     vi.unstubAllGlobals();
   });
 
+  it("falls back to publicNotice and openAt for FastCampus dates", async () => {
+    const html = '<div data-course-id="264974"></div><div data-course-id="263403"></div>';
+
+    const fetchMock = vi.fn().mockImplementation(async (url: string) => {
+      if (url.includes(".api/courses/products")) {
+        return {
+          ok: true,
+          json: async () => ({
+            data: {
+              "264974": [{ id: 1, courseId: 264974, description: "온라인 세미나 안내" }],
+              "263403": [{ id: 2, courseId: 263403, description: "온라인 세미나 안내" }],
+            },
+          }),
+        };
+      }
+      if (url.includes(".api/courses")) {
+        return {
+          ok: true,
+          json: async () => ({
+            data: [
+              {
+                id: 264974,
+                state: "ONGOING",
+                slug: null,
+                publicTitle: "[무료 세미나] 공지에만 일정이 있는 세미나",
+                publicNotice:
+                  "【실시간 세미나 안내】\n– 세미나 일정은 2099년 7월 3일 (금) 19:00 ~ 20:30이며, 당일 안내드립니다.",
+                openAt: "2099-07-02T15:00:00.000Z",
+              },
+              {
+                id: 263403,
+                state: "ONGOING",
+                slug: null,
+                publicTitle: "[무료 세미나] openAt만 있는 세미나",
+                publicNotice: "ZOOM으로 진행됩니다.",
+                openAt: "2099-05-05T15:00:00.000Z",
+              },
+            ],
+          }),
+        };
+      }
+      return { ok: false, status: 404 };
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const cards = await discoverFastCampusCards("https://fastcampus.co.kr/openseminar_new", html);
+    expect(cards).toHaveLength(2);
+
+    const noticeCard = cards.find((card) => card.title.includes("공지에만"));
+    expect(noticeCard?.startsAt?.toISOString()).toBe("2099-07-03T10:00:00.000Z");
+
+    const openAtCard = cards.find((card) => card.title.includes("openAt만"));
+    expect(openAtCard?.startsAt?.toISOString()).toBe("2099-05-05T15:00:00.000Z");
+
+    vi.unstubAllGlobals();
+  });
+
   it("discovers Ticketa events via Supabase API", async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
