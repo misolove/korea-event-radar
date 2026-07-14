@@ -2,7 +2,8 @@ import { and, desc, eq, or } from "drizzle-orm";
 import { eventEvidence, events, ingestionRuns, statusSnapshots } from "@/db/schema";
 import { getDb } from "@/db/client";
 import { hasDatabaseUrl } from "@/lib/env";
-import { compareEvents, inferPastStatus, isPastEvent, looksHistoricalWithoutDates } from "@/lib/format";
+import { compareEvents, hasEventStarted, inferPastStatus, looksHistoricalWithoutDates } from "@/lib/format";
+import { extractStartDateHint } from "@/lib/date-hint";
 import {
   type EventDetail,
   type EventEvidence,
@@ -133,6 +134,11 @@ function rowToSummary(
   latestEvidence?: Pick<typeof eventEvidence.$inferSelect, "extractedStatusText"> | null,
 ): EventSummary {
   const effectiveStatus = resolveEffectiveStatus(row, latestEvidence);
+  // 날짜가 전혀 없는 행사는 제목/설명 텍스트에서 시작 일시를 추정해 채운다.
+  const hintedStartsAt =
+    !row.startsAt && !row.endsAt ? extractStartDateHint([row.title, row.summary]) : null;
+  const startsAt = row.startsAt?.toISOString() ?? hintedStartsAt?.toISOString() ?? null;
+  const endsAt = row.endsAt?.toISOString() ?? null;
 
   return {
     id: row.id,
@@ -145,13 +151,13 @@ function rowToSummary(
     registrationUrl: row.registrationUrl,
     city: row.city,
     venueName: row.venueName,
-    startsAt: row.startsAt?.toISOString() ?? null,
-    endsAt: row.endsAt?.toISOString() ?? null,
+    startsAt,
+    endsAt,
     registrationDeadline: row.registrationDeadline?.toISOString() ?? null,
     registrationStatus: inferPastStatus(
       effectiveStatus.registrationStatus,
-      row.startsAt?.toISOString() ?? null,
-      row.endsAt?.toISOString() ?? null,
+      startsAt,
+      endsAt,
       row.title,
       row.summary,
     ),
@@ -194,7 +200,7 @@ function matchesFilters(event: EventSummary, filters: ListEventsInput): boolean 
 
   if (
     !shouldIncludePast &&
-    (isPastEvent(event.startsAt, event.endsAt) ||
+    (hasEventStarted(event.startsAt, event.endsAt) ||
       looksHistoricalWithoutDates(event.title, event.summary, event.startsAt, event.endsAt))
   ) {
     return false;

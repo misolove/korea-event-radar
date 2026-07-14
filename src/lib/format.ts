@@ -75,6 +75,20 @@ export function isPastEvent(
   return reference < now;
 }
 
+// 목록 노출용 판정: 종료 여부와 무관하게 시작일이 지난 행사는 지난 행사로 취급한다.
+// DB 정리(cleanup)는 진행 중인 장기 과정을 지우면 안 되므로 계속 isPastEvent(종료일 기준)를 쓴다.
+export function hasEventStarted(
+  startsAt: string | Date | null,
+  endsAt: string | Date | null,
+  now = Date.now(),
+) {
+  const reference = toMillis(startsAt) ?? toMillis(endsAt);
+  if (reference === null) {
+    return false;
+  }
+  return reference < now;
+}
+
 export function looksHistoricalWithoutDates(
   title: string | null | undefined,
   summary: string | null | undefined,
@@ -106,7 +120,7 @@ export function inferPastStatus(
   title?: string | null,
   summary?: string | null,
 ): RegistrationStatus {
-  if (isPastEvent(startsAt, endsAt) && status !== "waitlist") {
+  if (hasEventStarted(startsAt, endsAt) && status !== "waitlist") {
     return "past";
   }
 
