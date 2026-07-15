@@ -36,6 +36,7 @@ npm run ingest
 - `TURSO_AUTH_TOKEN`
 - `PUBLIC_OPS_MODE=summary`
 - `DISABLE_WRITE_ROUTES=1`
+- `OPS_SECRET`
 - `EVENTS_REVALIDATE_SECONDS=300`
 - `OPS_REVALIDATE_SECONDS=600`
 - `OPENAI_API_KEY` (선택)
@@ -43,7 +44,7 @@ npm run ingest
 
 3. Build Command는 기본값 `npm run build`, Output은 Next.js 자동 감지를 그대로 씁니다.
 
-- 읽기 전용 공개 배포라면 `OPS_SECRET`은 Vercel에 넣지 않아도 됩니다.
+- `/api/cron/ingest`는 Vercel Cron과 수동 실행 모두 `Authorization: Bearer {OPS_SECRET}` 헤더가 필요합니다.
 - `/api/ops/recheck`는 `DISABLE_WRITE_ROUTES=1` 또는 `OPS_SECRET` 미설정 상태에서 404가 됩니다.
 
 ## 4. GitHub Actions 시크릿

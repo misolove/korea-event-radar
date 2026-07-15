@@ -27,17 +27,10 @@ function toDbStatus(status: string): RegistrationStatus {
 }
 
 export async function GET(req: NextRequest) {
-  // Vercel Cron은 Authorization: Bearer <OPS_SECRET> 헤더를 자동 추가합니다
   const authHeader = req.headers.get("authorization");
-  const userAgent = req.headers.get("user-agent") ?? "";
   const cronSecret = getEnv().OPS_SECRET;
 
-  // Vercel Cron: User-Agent가 vercel-cron/1.0 이면 허용 (Vercel 내부 호출)
-  const isVercelCron = userAgent.includes("vercel-cron");
-  // 수동 트리거: OPS_SECRET Bearer 인증
-  const isManualTrigger = cronSecret && authHeader === `Bearer ${cronSecret}`;
-
-  if (!isVercelCron && !isManualTrigger) {
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

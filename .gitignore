@@ -5,6 +5,11 @@ node_modules
 coverage
 playwright-report
 test-results
+*.log
+*.tsbuildinfo
+.DS_Store
+.omx/
+.playwright-cli/
 drizzle/meta
 .vercel
 .env*.local
@@ -12,6 +17,8 @@ drizzle/meta
 
 # Secrets — never commit real keys
 *.secret
+*.pem
+*.key
 secrets/
 .secrets
 .env.production
