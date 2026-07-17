@@ -28,6 +28,11 @@
   --red:        #F04438;
   --red-soft:   #FFE6E3;
 
+  /* oklch 기반 고도화 (v0 polish) */
+  --bg-subtle:  oklch(0.98 0.005 250);
+  --panel-ai:   oklch(0.97 0.01 260);
+  --accent-ai:  oklch(0.6 0.18 260); /* Purple-ish */
+  
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 16px;
@@ -35,11 +40,11 @@
   --r-pill: 999px;
 
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
 
   /* 기존 변수 호환 매핑 */
-  --bg:   var(--gray-50);
+  --bg:   var(--bg-subtle);
   --text: var(--ink);
   --muted: var(--gray-500);
   --mint:  var(--green);
@@ -53,6 +58,55 @@
   --panel: #fff;
   --shadow: var(--shadow-md);
   --shadow-soft: var(--shadow-sm);
+}
+
+/* AI Curation Panel 고도화 */
+.ai-curation-details {
+  border-radius: var(--r-md);
+  background: var(--panel-ai);
+  border: 1px solid oklch(0.9 0.02 260);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.ai-curation-details[open] {
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.ai-curation-summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-ai);
+  user-select: none;
+}
+
+.ai-curation-summary::-webkit-details-marker {
+  display: none;
+}
+
+.ai-curation-summary::before {
+  content: "✦";
+  font-size: 14px;
+}
+
+.ai-curation-summary::after {
+  content: "분석 보기";
+}
+
+.ai-curation-details[open] .ai-curation-summary::after {
+  content: "닫기";
+}
+
+.ai-curation-content {
+  padding: 0 12px 12px;
+  display: grid;
+  gap: 8px;
 }
 
 /* ─────────────────────────────────────────────
@@ -676,15 +730,21 @@ button {
   flex-direction: column;
   gap: 12px;
   cursor: pointer;
-  transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
   text-decoration: none;
   color: inherit;
 }
 
 .event-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--gray-200);
+  background: linear-gradient(180deg, #fff 0%, var(--bg-subtle) 100%);
+}
+
+.event-card:focus-within {
+  outline: 2px solid var(--blue-soft);
+  outline-offset: 3px;
 }
 
 /* Card top: date + score */
@@ -1506,7 +1566,8 @@ a.verify-badge-link:active {
 }
 
 /* ── Filter Chips ──────────────────────────────────────── */
-.filter-chip { display:inline-flex; align-items:center; gap:4px; padding:5px 14px; border-radius:var(--r-pill); border:1.5px solid var(--gray-300); background:var(--white); color:var(--gray-600); font-size:0.83rem; font-weight:500; cursor:pointer; transition:all .15s; text-decoration:none; }
-.filter-chip:hover { border-color:var(--ink); color:var(--ink); }
-.filter-chip--active { background:var(--ink); border-color:var(--ink); color:var(--white); }
+.filter-chip { display:inline-flex; align-items:center; gap:4px; padding:5px 14px; border-radius:var(--r-pill); border:1.5px solid var(--gray-200); background:var(--white); color:var(--gray-600); font-size:0.83rem; font-weight:600; cursor:pointer; transition:all .15s ease; text-decoration:none; }
+.filter-chip:hover { border-color:var(--ink); color:var(--ink); background:var(--gray-50); transform:translateY(-1px); box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.filter-chip--active { background:var(--ink); border-color:var(--ink); color:var(--white); box-shadow:0 2px 8px rgba(14,17,22,0.15); }
+.filter-chip--active:hover { background:var(--gray-700); border-color:var(--gray-700); color:var(--white); }
 .filter-chip-row { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
